@@ -1,0 +1,191 @@
+html, body, p, h1, h2, h3, a {
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    font-family: 'Oswald', Arial, sans-serif;
+    text-align: center;
+}
+
+h2  {
+    font-size: 18px;
+    text-transform: uppercase;
+}
+
+h3 {
+    font-size: 18px;
+    font-style: italic;
+    line-height: 18px;
+}
+
+#screen {
+    width: 400px;
+    height: 720px;
+    display: inline-block;
+    margin-top: 250px;
+    box-shadow: 0px 2px 2px #888;
+    overflow: hidden;
+}
+
+.nav_bar {
+    width: 100%;
+    height: 60px;
+    display: inline-block;
+}
+
+.nav_button {
+    width: 49.5%;
+    height: 50px;
+    display: inline-block;
+    background-color: #e6e6e6;
+    vertical-align: top;
+}
+
+.nav_button  p{
+    font-size: 20px;
+    margin-top: 15px;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+#active_area {
+    width: calc(100% + 14px);
+    height: 540px;
+    display: inline-block;
+    overflow-y: scroll;
+}
+
+#search_area {
+    width: 100%;
+    height: 540px;
+    display: none;
+    background-color: #222;
+}
+
+#search_bar {
+    width: 80%;
+    height: 30px;
+    border: none;
+    background: none;
+    border-bottom: 1px solid #FFF;
+    display: inline-block;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    color: #FFF;
+    text-align: left;
+    padding: 0;
+}
+
+#cancel {
+    margin-top: 50px;
+    font-size: 24px;
+    font-style: italic;
+    text-decoration: underline;
+    color: #FFF;
+    cursor: pointer;
+}
+
+#results {
+    border-bottom: 1px solid #FFF;
+}
+
+.result_track {
+    width: 100%;
+    height: 50px;
+    display: block;
+    border-top: 1px solid #FFF;
+    text-align: left;
+    cursor: pointer;
+}
+
+.result_track p{
+    margin-top: 8px;
+    margin-left: 10px;
+    font-size: 24px;
+    color: #FFF;
+}
+
+.playlist_track{
+    width: 400px;
+    height: 60px;
+    display: block;
+    border-top: 1px solid #999;
+    text-align: left;
+    margin-top: 1px;
+}
+
+.track_num {
+    width: 60px;
+    height: 60px;
+    float: left;
+    text-align: center;
+    line-height: 60px;
+    vertical-align: top;
+    font-size: 24px;
+}
+
+.track_pic{
+    width: 60px;
+    height: 60px;
+    float: left;
+    background-color: #222;
+}
+
+.track_artist_song {
+    width: 200px;
+    height: 60px;
+    float: left;
+    margin-left: 10px;
+    text-overflow: ellipsis;    
+    white-space: nowrap;
+    overflow: hidden;    
+}
+
+.track_rating {
+    width: 60px;
+    height: 60px;
+    float: left;
+    text-align: center;
+    line-height: 60px;
+    vertical-align: top;
+    font-size: 24px;
+}
+
+#play  {
+    width: 60px;
+    height: 60px;
+    display: inline-block;
+    border: 2px solid #000;
+    border-radius: 50%;
+    text-align: center;
+    margin-top: 10px;
+    margin-right: 10px;
+}
+
+#play .fa-pause {
+    margin-left: 2px;
+    margin-top: 14px;
+}
+
+.fa , #play{
+   cursor: pointer;
+}
+
+@media (max-width: 800px) {
+	
+}
+
+
+@media screen and (-webkit-min-device-pixel-ratio: 0) and (min-width: 800px){
+	body {
+		-moz-transform: scale(0.9, 0.9); /* Moz-browsers */
+		zoom: 0.9; /* Other non-webkit browsers */
+		zoom: 90%;   
+	}	
+}
+
