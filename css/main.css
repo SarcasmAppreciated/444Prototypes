@@ -60,8 +60,58 @@ h3 {
     overflow-y: scroll;
 }
 
-.playlist_track{
+#search_area {
     width: 100%;
+    height: 540px;
+    display: none;
+    background-color: #222;
+}
+
+#search_bar {
+    width: 80%;
+    height: 30px;
+    border: none;
+    background: none;
+    border-bottom: 1px solid #FFF;
+    display: inline-block;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    color: #FFF;
+    text-align: left;
+    padding: 0;
+}
+
+#cancel {
+    margin-top: 50px;
+    font-size: 24px;
+    font-style: italic;
+    text-decoration: underline;
+    color: #FFF;
+    cursor: pointer;
+}
+
+#results {
+    border-bottom: 1px solid #FFF;
+}
+
+.result_track {
+    width: 100%;
+    height: 50px;
+    display: block;
+    border-top: 1px solid #FFF;
+    text-align: left;
+    cursor: pointer;
+}
+
+.result_track p{
+    margin-top: 8px;
+    margin-left: 10px;
+    font-size: 24px;
+    color: #FFF;
+}
+
+.playlist_track{
+    width: 400px;
     height: 60px;
     display: block;
     border-top: 1px solid #999;
@@ -72,7 +122,7 @@ h3 {
 .track_num {
     width: 60px;
     height: 60px;
-    display: inline-block;
+    float: left;
     text-align: center;
     line-height: 60px;
     vertical-align: top;
@@ -82,14 +132,15 @@ h3 {
 .track_pic{
     width: 60px;
     height: 60px;
-    display: inline-block;
+    float: left;
     background-color: #222;
 }
 
 .track_artist_song {
     width: 200px;
     height: 60px;
-    display: inline-block;
+    float: left;
+    margin-left: 10px;
     text-overflow: ellipsis;    
     white-space: nowrap;
     overflow: hidden;    
@@ -98,7 +149,7 @@ h3 {
 .track_rating {
     width: 60px;
     height: 60px;
-    display: inline-block;
+    float: left;
     text-align: center;
     line-height: 60px;
     vertical-align: top;
@@ -117,7 +168,7 @@ h3 {
 }
 
 #play .fa-pause {
-    margin-left: 4px;
+    margin-left: 2px;
     margin-top: 14px;
 }
 
