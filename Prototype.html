@@ -1,0 +1,124 @@
+ <!DOCTYPE html>
+<!--[if lt IE 7]><html class="lt-ie10 lt-ie9 lt-ie8 lt-ie7"><![endif]-->
+<!--[if IE 7]><html class="lt-ie10 lt-ie9 lt-ie8"><![endif]-->
+<!--[if IE 8]><html class="lt-ie10 lt-ie9"> <![endif]-->
+<!--[if IE 9]><html class="lt-ie10"> <![endif]-->
+<!--[if gt IE 9]><!--> <html> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <title>448 Medium Fidelity Prototype</title>
+       
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+				
+        <link href='https://fonts.googleapis.com/css?family=Oswald:300' rel='stylesheet' type='text/css'>
+        <link href='https://fonts.googleapis.com/css?family=Lato:300' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+        
+		<script src="js/jquery.min.js"></script>		        
+        <link rel="stylesheet" href="css/main.css">
+    </head>
+    <body>
+        <div id="phone">
+            <div id="screen">
+                <div class="full_screen" id="start_screen">
+                    <div>
+                        <div id="logo"></div>
+                        <button class="start_screen_button"><p>Create Playlist</p></button>
+                    </div>
+                </div>
+                <div class="full_screen">
+                    <h1 id="start_up">We're setting up things!</h1>
+                    </br>
+                    <h1 class="fa fa-spin fa-gear fa-4x" style="color: #FFF;"></h1>
+                </div>
+                <div class="nav_bar">
+                    <div class="nav_button" id="search"><p>+ Add Songs</p></div>
+                    <div class="nav_button" id="collaborate" style="background-color: #f76f2c; color: #FFF;"><p>Collaborate!</p></div>
+                </div>
+                <div id="collab_field">
+                    <p>Share this link!</p>
+                    <input placeholder="http://benson.li/444Prototypes/Prototype.html"></input><div class="fa fa-check-square fa-2x"></div>
+                </div>
+                <div id="active_area">
+                    <div id="search_area">
+                        <div class="fa fa-search" style="color: #FFF; margin-right: 5px;"></div><input id="search_bar"></input>
+                        <div id="results">
+                            <div class="result_track" id="odesza">
+                                <p>ODESZA - WHITE LIES</p>
+                            </div>
+                            <div class="result_track" id="houdini">
+                                <p>FOSTER THE PEOPLE - HOUDINI</p>
+                            </div>
+                        </div>
+                        <div class="fa fa-close fa-4x" id="cancel"></div>
+                    </div>
+                    <div id="playlist">
+                        <div class="playlist_track">
+                            <div class="track_num">></div>
+                            <div class="track_pic"></div>
+                            <div class="track_artist_song">
+                                <h3 style="margin-top: 10px;">ODESZA</h3>
+                                <h2>SAY MY NAME (FEAT. ZYRA)</h2>
+                            </div>
+                            <div class="track_rating">12</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav_bar" style="height: 120px; background-color: #e6e6e6;">
+                    
+                    <div id="play">
+                        <div class="fa fa-pause fa-2x"></div>
+                    </div>
+                    <div class="fa fa-fast-forward fa-2x"></div>
+                    
+                    <h2 style="margin-top: 10px;"><i>Now Playing</i> : ODESZA - SAY MY NAME</h2>
+                </div>
+            </div>
+        </div>
+        <script>
+            $( document).ready(function (){
+                $(".start_screen_button").click(function(){
+                    $("#start_screen").fadeOut("slow", function(){
+                        $(".full_screen").delay(1500).fadeOut("slow");
+                    });                    
+                });                
+            
+                $("#search").click(function(){
+                    $(this).css({"background-color" : "#222", "color" : "#FFF"});
+                    $("#search_area").fadeIn("slow");
+                    $("#collab_field").fadeOut("slow");
+                })
+
+                $("#odesza").click(function(){
+                    $("#playlist").append("<div class='playlist_track'><div class='track_num'>9</div><div class='track_pic'></div><div class='track_artist_song'><h3 style='margin-top: 10px;'>ODESZA</h3><h2>WHITE LIES (FEAT. JENNI POTTS)</h2></div><div class='track_rating'>0</div></div>");
+                    hideSearch();
+                });
+                
+                $("#houdini").click(function(){
+                    $("#playlist").append("<div class='playlist_track'><div class='track_num'>10</div><div class='track_pic'></div><div class='track_artist_song'><h3 style='margin-top: 10px;'>FOSTER THE PEOPLE</h3><h2>HOUDINI</h2></div><div class='track_rating'>0</div></div>");
+                    hideSearch();
+                });
+                
+                $("#cancel").click(function(){
+                    hideSearch();
+                });
+                
+                $("#collaborate").click(function(){
+                    $("#collab_field").fadeIn("slow");
+                });
+                
+                $(".fa-check-square").click(function(){
+                    $("#collab_field").fadeOut("slow");
+                });
+                
+                function hideSearch() {
+                    $("#search_area").fadeOut("slow");
+                    $("#search").css({"background-color" : "#e6e6e6", "color" : "#000"});
+                }
+            });
+        </script>
+    </body>
+</html>
+ 
+ 
