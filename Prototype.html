@@ -83,7 +83,7 @@
                     class="video-js"
                     controls
                     width="640" height="264"
-                    data-setup='{ "techOrder": ["youtube"], "sources": [{ "type": "video/youtube", "src": "https://www.youtube.com/watch?v=DiEwJTOderQ"}]}'
+                    data-setup='{ "techOrder": ["youtube"], "sources": [{ "type": "video/youtube", "src": "https://www.youtube.com/watch?v=HdzI-191xhU"}]}'
                   >
             </audio>
         <script>
@@ -103,17 +103,20 @@
                     if(isPlaying) {
                         ytPlayer.pause();
                         isPlaying = false;
+                        $(".fa-play").removeClass("fa-pause");
+                        
                     }
                     else {
                         ytPlayer.play();
                         isPlaying = true;
+                        $(".fa-play").addClass("fa-pause");
                     }
                 });
                 
             
                 $(".start_screen_button").click(function(){
                     $("#start_screen").fadeOut("slow", function(){
-                        $(".full_screen").delay(1500).fadeOut("slow");
+                        $(".full_screen").delay(1000).fadeOut("slow");
                     });                    
                 });                
             
