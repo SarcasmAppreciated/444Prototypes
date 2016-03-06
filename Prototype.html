@@ -77,13 +77,13 @@
             </div>            
         </div>
         <audio
-                    id="testYT"
-                    class="video-js"
-                    controls
-                    width="640" height="264"
-                    data-setup='{ "techOrder": ["youtube"], "sources": [{ "type": "video/youtube", "src": "https://www.youtube.com/watch?v=QtLXvh8mv3o&list=PL5qjstFaIeLxDL4JOwrOHao66Av7PItYH&index=1"}]}'
-                  >
-            </audio>
+            id="testYT"
+            class="video-js"
+            controls
+            width="640" height="264"
+            data-setup='{ "techOrder": ["youtube"], "sources": [{ "type": "video/youtube", "src": "https://www.youtube.com/watch?v=QtLXvh8mv3o&list=PL5qjstFaIeLxDL4JOwrOHao66Av7PItYH&index=1"}]}'
+        >
+        </audio>
         <script>
             // https://developers.google.com/youtube/v3/code_samples/javascript
             // https://developers.google.com/youtube/v3/guides/implementation/playlists#playlistItems-update
@@ -92,9 +92,9 @@
                 var isPlaying = false;                             
                 
                 var ytPlayer = videojs('testYT', { /* Options */ }, function() {                    
-                    /*this.on('ended', function() {
-                        ytPlayer.pause().currentTime(0);
-                    });      */                  
+                    this.on('ended', function() {
+                        ytPlayer.play(); //.currentTime(0);
+                    });                 
                 });
 
                 $("#play").click(function(){
