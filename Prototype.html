@@ -92,37 +92,37 @@
             $( document).ready(function (){
                 var isPlaying = false;                             
                 
-                var ytPlayer = videojs('testYT', { /* Options */ }, function() {                 
-                                    
-                    var playlist = this.playlist({
+                videojs('testYT', { /* Options */ }, function() {                 
+                    var ytPlayer = this;      
+                    var playlist = ytPlayer.playlist({
                     'mediaType': 'audio',
                     'continuous': true
                     });
                     
                     this.on('ended', function() {
                         ytPlayer.pause().currentTime(0);
-                    });                   
+                    });
+
+                    $("#play").click(function(){
+                        if(isPlaying) {
+                            ytPlayer.pause();
+                            isPlaying = false;
+                            $(".fa-play").removeClass("fa-pause");                        
+                        }
+                        else {
+                            ytPlayer.play();
+                            isPlaying = true;
+                            $(".fa-play").addClass("fa-pause");
+                        }
+                    });
                     
+                    $("#skip").click(function(){
+                        alert("Try 1");
+                        ytPlayer.next();
+                    });
+                        
                 });                                                      
-                
-                $("#play").click(function(){
-                    if(isPlaying) {
-                        ytPlayer.pause();
-                        isPlaying = false;
-                        $(".fa-play").removeClass("fa-pause");                        
-                    }
-                    else {
-                        ytPlayer.play();
-                        isPlaying = true;
-                        $(".fa-play").addClass("fa-pause");
-                    }
-                });
-                
-                $("#skip").click(function(){
-                    alert(ytPlayer.index(0));
-                    ytPlayer.next();
-                });
-                
+                                  
             
                 $(".start_screen_button").click(function(){
                     $("#start_screen").fadeOut("slow", function(){
