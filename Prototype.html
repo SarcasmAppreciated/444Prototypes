@@ -82,7 +82,7 @@
                     class="video-js"
                     controls
                     width="640" height="264"
-                    data-setup='{ "techOrder": ["youtube"], "sources": [{ "type": "video/youtube", "src": "https://www.youtube.com/watch?v=HdzI-191xhU"}]}'
+                    data-setup='{ "techOrder": ["youtube"], "sources": [{ "type": "video/youtube", "src": "https://www.youtube.com/watch?v=HdzI-191xhU"}, { "type": "video/youtube", "src": "https://www.youtube.com/watch?v=YykjpeuMNEk"}]}'
                   >
             </audio>
         <script>
@@ -98,6 +98,7 @@
                     'mediaType': 'audio',
                     'continuous': true
                     });
+                    
                     this.on('ended', function() {
                         ytPlayer.pause().currentTime(0);
                     });                   
@@ -118,6 +119,7 @@
                 });
                 
                 $("#skip").click(function(){
+                    alert(ytPlayer.index(0));
                     ytPlayer.next();
                 });
                 
