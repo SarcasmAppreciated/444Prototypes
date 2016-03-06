@@ -21,7 +21,7 @@ function createPlaylist() {
         description: 'A private playlist created with the YouTube API'
       },
       status: {
-        privacyStatus: 'private'
+        privacyStatus: 'public'
       }
     }
   });
