@@ -254,7 +254,7 @@ button.start_screen_button p {
 }
 
 .video-js {
-    
+    display: none;
 }
 
 @media (max-width: 800px) {
