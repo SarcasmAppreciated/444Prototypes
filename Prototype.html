@@ -111,7 +111,8 @@
                 });
                 
                 $("#skip").click(function(){
-                    ytPlayer.play().currentTime(ytPlayer.duration());
+                    alert(ytPlayer.currentSrc());
+                    ytPlayer.setCurrentTime(ytPlayer.duration());
                 });
                                   
             
