@@ -94,10 +94,10 @@
                 
                 var ytPlayer = videojs('testYT', { /* Options */ }, function() {                 
                                     
-                    var playlist = this.playlist({
+                    /*var playlist = this.playlist({
                     'mediaType': 'audio',
                     'continuous': true
-                    });
+                    });*/
                     this.on('ended', function() {
                         ytPlayer.pause().currentTime(0);
                     });                    
@@ -116,10 +116,10 @@
                         $(".fa-play").addClass("fa-pause");
                     }
                 });
-                
+                /*
                 $("#skip").click(function(){
                     ytPlayer.next();
-                });
+                });*/
                 
             
                 $(".start_screen_button").click(function(){
