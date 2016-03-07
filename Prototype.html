@@ -210,6 +210,7 @@
                         return curr;
                     } else if($id.attr("state") == 1) {
                         $id.css("color", "#ff0000");
+                        curr = parseInt($id.text());
                         $id.attr("state", 2);
                         return -1 * curr;                            
                     } else if($id.attr("state") == 2) {
