@@ -189,8 +189,11 @@
                 
                 
                 function rateTrack($id) {
-                    alert($id.css("color"));
-                
+                    if($id.css("color") == "rgb(0, 0, 0)") {
+                        $id.css("color", "#00a651");
+                        var curr = $id.text();
+                        $id.text(curr + 1);
+                    }               
                 }
                 
                 
