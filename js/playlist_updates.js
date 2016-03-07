@@ -92,7 +92,7 @@ function requestVideoPlaylist(playlistId, pageToken) {
 
     // console.log( playlistItems.length, playlistItems );
     $.each( playlistItems, function( index, item ) {
-        console.log( item.id );
+        console.log( playlistItems.id );
     } );
   });
 }
