@@ -260,7 +260,7 @@ button.start_screen_button p {
    cursor: pointer;
 }
 
-.video-js {
+#player {
     display: none;
 }
 
