@@ -91,10 +91,8 @@ function requestVideoPlaylist(playlistId, pageToken) {
     var playlistItems = response.items;
     var count = 0;
     console.log(playlistItems);
-    console.log(id);
-    console.log(playlistItems.items.item[count].id);
-    console.log(playlistItems.items[count].id);
-    console.log(playlistItems.item[count].id);
+    console.log(playlistItems[count]);
+
     count++;
     
     /*$.each( playlistItems, function( index, item ) {
