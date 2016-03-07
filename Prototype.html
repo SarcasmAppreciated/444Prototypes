@@ -28,7 +28,7 @@
                     <div>
                         <div id="logo"></div>
                         <button class="start_screen_button" id="login-link"><p>Login</p></button>
-                        <button class="start_screen_button" id="playlist-button" disabled onclick="createPlaylist()"><p>Create Playlist</p></button>
+                        <button class="start_screen_button" id="playlist-button"  onclick="createPlaylist()"><p>Create Playlist</p></button>
                     </div>
                 </div>
                 <div class="full_screen">
@@ -96,27 +96,15 @@
                     width: '640',
                     videoId: 'M7lc1UVf-VE',
                     events: {
-                        'onReady': onPlayerReady,
-                        'onStateChange': onPlayerStateChange
+                        'onReady': onPlayerReady
                     }
                 });
+                // player.loadPlaylist("PL5qjstFaIeLw757wQWpvE_aURI1zEdSta", 0, 0, "default");
             }
 
             function onPlayerReady(event) {
                 event.target.playVideo();
-            }
-
-            var done = false;
-            function onPlayerStateChange(event) {
-                if (event.data == YT.PlayerState.PLAYING && !done) {
-                  setTimeout(stopVideo, 6000);
-                  done = true;
-                }
-            }
-            function stopVideo() {
-                player.stopVideo();
-            }
-        
+            }        
         
         
             $( document).ready(function (){
@@ -124,18 +112,18 @@
 
                 $("#play").click(function(){
                     if(isPlaying) {
-                        // player.pause();
+                        player.pauseVideo();
                         isPlaying = false;
                         $(".fa-play").removeClass("fa-pause");                        
                     } else {
-                        // player.play();
+                        player.playVideo();
                         isPlaying = true;
                         $(".fa-play").addClass("fa-pause");
                     }
                 });
                 
                 $("#skip").click(function(){
-                    
+                    player.nextVideo();
                 });                
                 
                                   
