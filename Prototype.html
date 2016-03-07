@@ -185,11 +185,12 @@
                     $(".track_rating").click(function(){
                         rateTrack($(this));
                     });
-                });
-                
+                });                
                 
                 function rateTrack($id) {
-                    console.log($id.css("color"));
+                    var index = $id.attr("value");
+                    requestVideoPlaylist(getPlaylistID(), index);
+
                     if($id.css("color") == "rgb(0, 0, 0)") {
                         $id.css("color", "#00a651");
                         var curr = parseInt($id.text()) + 1;
@@ -198,20 +199,14 @@
                         $id.css("color", "#ff0000");
                         var curr = parseInt($id.text()) - 2;
                         $id.text(curr);
+                        removeFromPlaylist($("#delete_item").text());
+                        $id.parent().remove();
                     } else if($id.css("color") == "rgb(255, 0, 0)") {
                         $id.css("color", "#000000");
                         var curr = parseInt($id.text()) + 1;
                         $id.text(curr);
                     }
                 }
-                
-                
-                
-                // var index = $(this).attr("value");
-                // requestVideoPlaylist(getPlaylistID(), index);
-                
-                
-                // removeFromPlaylist($("#delete_item").text());
               
                 $("#cancel").click(function(){
                     hideSearch();
