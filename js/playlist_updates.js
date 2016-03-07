@@ -90,10 +90,27 @@ function requestVideoPlaylist(playlistId, pageToken) {
   request.execute(function(response) {
     var playlistItems = response.items;
     
-    console.log( playlistItems.length, playlistItems );
+    console.log('ids', traverse(playlistItems));
+    // console.log( playlistItems );
     /*$.each( playlistItems, function( index, item ) {
         console.log( item.id );
     } );*/
   });
 }
+
+function traverse(obj) {
+    var ids = [];
+    for (var prop in obj) {
+        if (typeof obj[prop] == "object" && obj[prop]) {
+            if (prop == 'id') {
+                ids = obj[prop].map(function(elem){
+                   return elem.id;
+               })
+            }
+            ids =ids.concat(traverse(obj[prop]));
+        }
+    }
+    return ids;
+}
+
 
