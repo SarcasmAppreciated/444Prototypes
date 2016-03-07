@@ -229,10 +229,15 @@
                 
                 function removeVideo($id) {
                     requestVideoPlaylist(getPlaylistID(), $id.attr("value"));
+                    
                     setTimeout(function(){
                         removeFromPlaylist($("#delete_item").text());
+                        
+                        if($id.parent().find(".track_num").text() == ">")
+                            alert();
+                        
                         $id.parent().remove();
-                    }, 1000);                
+                    }, 1000);
                 }
                                 
                 function hideSearch() {
