@@ -152,8 +152,15 @@
                     var artist = $(this).attr("artist");
                     var track = $(this).attr("track");
                     
-                    if(count == 1) {
-                        
+                    console.log(player.getPlaylistIndex());
+                    console.log(player.getCurrentTime());
+                    player.loadPlaylist({list: getPlaylistID(),
+                        listType:"playlist",
+                        index:player.getPlaylistIndex(),
+                        startSeconds: player.getCurrentTime(),
+                        suggestedQuality:"default"});
+                    
+                    if(count == 1) {                        
                         $("#playlist").append("<div class='playlist_track'><div class='track_num'>></div><div class='track_artist_song'><h3 style='margin-top: 10px;'>" + artist +"</h3><h2>" + track + "</h2></div><div class='track_rating'>0</div></div>");
                     } else
                         $("#playlist").append("<div class='playlist_track'><div class='track_num'>"+ count +"</div><div class='track_artist_song'><h3 style='margin-top: 10px;'>" + artist +"</h3><h2>" + track + "</h2></div><div class='track_rating'>0</div></div>");
@@ -166,13 +173,7 @@
                     hideSearch();
                 });
                 
-                $("#collaborate").click(function(){
-                    player.loadPlaylist({list: getPlaylistID(),
-                        listType:"playlist",
-                        index:0,
-                        startSeconds:0,
-                        suggestedQuality:"default"});
-                
+                $("#collaborate").click(function(){                
                     $("#collab_field").fadeIn("slow");
                 });
                 
