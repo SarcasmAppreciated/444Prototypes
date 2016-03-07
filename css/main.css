@@ -183,6 +183,9 @@ button.start_screen_button p {
     border-bottom: 1px solid #FFF;
     text-align: left;
     cursor: pointer;
+    text-overflow: ellipsis;    
+    white-space: nowrap;
+    overflow: hidden;    
 }
 
 .result_track p{
