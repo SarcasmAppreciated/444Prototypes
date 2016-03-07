@@ -90,9 +90,10 @@ function requestVideoPlaylist(playlistId, pageToken) {
   request.execute(function(response) {
     var playlistItems = response.items;
     
-    $.each( playlistItems, function( index, item ) {
+    console.log( playlistItems.length, playlistItems );
+    /*$.each( playlistItems, function( index, item ) {
         console.log( item.id );
-    } );
+    } );*/
   });
 }
 
