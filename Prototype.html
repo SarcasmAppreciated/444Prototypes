@@ -233,10 +233,11 @@
                     setTimeout(function(){
                         removeFromPlaylist($("#delete_item").text());
                         
-                        if($id.parent().find(".track_num").text() == ">")
+                        if($id.parent().find(".track_num").text() == ">") {
                             $id.parent().next().find(".track_num").text(">");
-                        
-                        $id.parent().remove();
+                            player.nextVideo(); 
+                        }
+                        $id.parent().remove();                        
                     }, 1000);
                 }
                                 
