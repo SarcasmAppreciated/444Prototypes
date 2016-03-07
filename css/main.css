@@ -33,7 +33,7 @@ h3 {
 }
 
 #screen {
-    width: 402px;
+    width: 400px;
     height: 702px;
     display: inline-block;
     margin-top: 153px;
@@ -61,7 +61,7 @@ h1#start_up {
     height:64px;
     display: inline-block;
     margin-top: 150px;
-    margin-bottom: 250px;
+    margin-bottom: 200px;
     background: url("../images/logo.png") center no-repeat;
 }
 
@@ -73,6 +73,10 @@ button.start_screen_button {
     border-radius: 2px;
     background-color: #e6e6e6;
     cursor: pointer;
+}
+
+#login-link {
+    margin-bottom: 20px;
 }
 
 button.start_screen_button :active {
@@ -107,7 +111,7 @@ button.start_screen_button p {
 }
 
 #collab_field  {
-    width: 402px;
+    width: 400px;
     height: 70px;
     display: none;
     position: absolute;
@@ -179,6 +183,9 @@ button.start_screen_button p {
     border-bottom: 1px solid #FFF;
     text-align: left;
     cursor: pointer;
+    text-overflow: ellipsis;    
+    white-space: nowrap;
+    overflow: hidden;    
 }
 
 .result_track p{
@@ -193,7 +200,7 @@ button.start_screen_button p {
     width: 400px;
     height: 60px;
     display: block;
-    border-top: 1px solid #999;
+    border-bottom: 1px solid #999;
     font-family: 'Oswald', Arial, sans-serif;
     text-align: left;
     margin-top: 1px;
@@ -217,7 +224,7 @@ button.start_screen_button p {
 }
 
 .track_artist_song {
-    width: 200px;
+    width: 250px;
     height: 60px;
     float: left;
     margin-left: 10px;
@@ -227,18 +234,18 @@ button.start_screen_button p {
 }
 
 .track_rating {
-    width: 60px;
+    width: 80px;
     height: 60px;
     float: left;
     text-align: center;
     line-height: 60px;
     vertical-align: top;
     font-size: 24px;
+    cursor: pointer;
 }
 
 #play  {
     width: 50px;
-    height: 50px;
     display: inline-block;
     text-align: center;
     margin-top: 10px;
@@ -253,8 +260,8 @@ button.start_screen_button p {
    cursor: pointer;
 }
 
-.video-js {
-    
+#player, #delete_item {
+    display: none;
 }
 
 @media (max-width: 800px) {
