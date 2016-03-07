@@ -78,7 +78,7 @@
                 </div>
             </div>            
         </div>
-        <div id="delete_item"></div>
+        <input id="delete_item"></input>
         <div id="player"></div>
         <script>        
             var isPlaying = false;
@@ -229,9 +229,6 @@
                 
                 function removeVideo($id) {
                     requestVideoPlaylist(getPlaylistID(), $id.attr("value"));                    
-                    setTimeout(function(){
-                        removeFromPlaylist($("#delete_item").text());                        
-                    }, 1000);
                     
                     setTimeout(function(){
                         if($id.parent().find(".track_num").text() == ">") {
@@ -240,7 +237,11 @@
                             $("#now_playing").delay(2000).text($(".track_artist_song").first().find("h3").text() + " - " + $(".track_artist_song").first().find("h2").text());
                         }
                     $id.parent().remove();                       
-                    }, 1500);
+                    }, 1000);
+                    
+                    setTimeout(function(){
+                        removeFromPlaylist($("#delete_item").val());                        
+                    }, 5000);
                 }
                                 
                 function hideSearch() {
