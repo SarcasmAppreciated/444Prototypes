@@ -151,16 +151,9 @@
                     $("#collab_field").fadeOut("slow");
                 })
 
-                var trackID;
-                
-                $(".track_rating").click(function(){
-                    getItemPlaylistID(trackID);
-                });
-                
-                
                 var count = 1;  
                 $(".result_track").click(function(){
-                    trackID = $(this).attr("value")
+                    var trackID = $(this).attr("value")
                     addVideoToPlaylist(trackID);
                    
                     var artist = $(this).attr("artist");
@@ -185,6 +178,10 @@
 
                     count++;
                     hideSearch();
+                    
+                    $(".track_rating").click(function(){
+                        getItemPlaylistID(trackID);
+                    });
                 });
               
                 $("#cancel").click(function(){
