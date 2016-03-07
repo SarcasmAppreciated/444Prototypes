@@ -74,13 +74,13 @@
                     <div id="play" class="fa fa-play fa-2x"></div>
                     <div id="skip" class="fa fa-fast-forward fa-2x"></div>
                     
-                    <!--<h2 style="margin-top: 10px;"><i>Now Playing</i> : ODESZA - SAY MY NAME</h2>-->
+                    <h2 style="margin-top: 10px;"><i>Now Playing</i> :<div id="now_playing" style="text-transform: uppercase;"></div></h2>
                 </div>
             </div>            
         </div>
         <div id="player"></div>
         <script>        
-            // https://developers.google.com/youtube/v3/code_samples/javascript
+            // https://developers.google.com/youtube/iframe_api_reference
             // https://developers.google.com/youtube/v3/guides/implementation/playlists#playlistItems-update
             
             var isPlaying = false;
@@ -134,9 +134,10 @@
                 }
             }
             
-            function nowPlaying() {
+            function nowPlaying() {                
                 $(".playlist_track").first().remove();
                 $(".track_num").delay(500).first().text(">");
+                $("#now_playing").delay(500).text($(".track_artist_song h2").first().text() + " - " + $(".track_artist_song h2").first.text());
             }
             
             $( document).ready(function (){            
