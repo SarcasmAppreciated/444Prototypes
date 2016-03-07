@@ -137,7 +137,8 @@
             function nowPlaying() {                
                 $(".playlist_track").first().remove();
                 $(".track_num").delay(500).first().text(">");
-                $("#now_playing").delay(500).text($(".track_artist_song h2").first().text() + " - " + $(".track_artist_song h2").first.text());
+                alert($(".track_artist_song").first().find("h3").text());
+                $("#now_playing").delay(500).text($(".track_artist_song").first().find("h3").text() + " - " + $(".track_artist_song").first().find("h2").text());
             }
             
             $( document).ready(function (){            
