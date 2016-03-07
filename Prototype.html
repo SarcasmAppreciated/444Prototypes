@@ -123,14 +123,10 @@
                 });
                 
                 $("#skip").click(function(){
-                    // player.nextVideo();
-                    
-                    player.loadPlaylist({list: getPlaylistID(),
-                        listType:"playlist",
-                        index:0,
-                        startSeconds:0,
-                        suggestedQuality:"default"});
+                    player.nextVideo();
                 });
+                
+                
             }
             
             
@@ -171,6 +167,12 @@
                 });
                 
                 $("#collaborate").click(function(){
+                    player.loadPlaylist({list: getPlaylistID(),
+                        listType:"playlist",
+                        index:0,
+                        startSeconds:0,
+                        suggestedQuality:"default"});
+                
                     $("#collab_field").fadeIn("slow");
                 });
                 
