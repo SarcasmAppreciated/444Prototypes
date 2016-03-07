@@ -169,12 +169,14 @@
 
                     isPlaying = true;
                     $(".fa-play").addClass("fa-pause");
+                   
+                    var reducedCount = count - 1;
                     
                     if(count == 1) {
-                        $("#playlist").append("<div class='playlist_track'><div class='track_num'>></div><div class='track_artist_song'><h3 style='margin-top: 10px;'>" + artist +"</h3><h2>" + track + "</h2></div><div value= '" + count - 1 +"' class='track_rating'>0</div></div>");
+                        $("#playlist").append("<div class='playlist_track'><div class='track_num'>></div><div class='track_artist_song'><h3 style='margin-top: 10px;'>" + artist +"</h3><h2>" + track + "</h2></div><div value= '" + reducedCount +"' class='track_rating'>0</div></div>");
                         $("#now_playing").delay(500).text($(".track_artist_song").first().find("h3").text() + " - " + $(".track_artist_song").first().find("h2").text());
                     } else
-                        $("#playlist").append("<div class='playlist_track'><div class='track_num'>"+ count +"</div><div class='track_artist_song'><h3 style='margin-top: 10px;'>" + artist +"</h3><h2>" + track + "</h2></div><div value= '" + count - 1 +"' class='track_rating'>0</div></div>");
+                        $("#playlist").append("<div class='playlist_track'><div class='track_num'>"+ count +"</div><div class='track_artist_song'><h3 style='margin-top: 10px;'>" + artist +"</h3><h2>" + track + "</h2></div><div value= '" + reducedCount +"' class='track_rating'>0</div></div>");
 
                     count++;
                     hideSearch();
