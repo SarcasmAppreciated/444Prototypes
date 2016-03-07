@@ -189,7 +189,8 @@
                 });
                 
                 function nowPlaying() {
-                    $(".playlist_track").first().remove();
+                    alert();
+                    $("#playlist").find(".playlist_track").first().remove();
                     $(".track_num").delay(500).first().text(">");
                 }
                 
