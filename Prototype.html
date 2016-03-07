@@ -85,7 +85,7 @@
             class="video-js"
             controls
             width="640" height="264"
-            data-setup='{}'
+            data-setup='{ "techOrder": ["youtube"], "sources": [{ "type": "video/youtube", "src": "https://www.youtube.com/watch?v=YykjpeuMNEk"}]}'
                     >
         </audio>
         <script>        
@@ -96,7 +96,7 @@
                 var isPlaying = false;                                            
                 
                 function instantiatePlaylist(trackID) {
-                    $("#testYT").attr("data-setup", "{ 'techOrder': ['youtube'], 'sources': [{ 'type': 'video/youtube', 'src': 'https://www.youtube.com/watch?v=" + trackID + "&list=" + getPlaylistID() + "'}]}");
+                    // $("#testYT").attr("data-setup", "{ 'techOrder': ['youtube'], 'sources': [{ 'type': 'video/youtube', 'src': 'https://www.youtube.com/watch?v=" + trackID + "&list=" + getPlaylistID() + "'}]}");
                 
                     var ytPlayer = videojs('testYT', {}, function() {
                 
