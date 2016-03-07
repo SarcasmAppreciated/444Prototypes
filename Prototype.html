@@ -174,10 +174,10 @@
                     var reducedCount = count - 1;
                     
                     if(count == 1) {
-                        $("#playlist").append("<div class='playlist_track'><div class='track_num'>></div><div class='track_artist_song'><h3 style='margin-top: 10px;'>" + artist +"</h3><h2>" + track + "</h2></div><div value= '" + reducedCount +"' class='track_rating'>0</div></div>");
+                        $("#playlist").append("<div class='playlist_track'><div class='track_num'>></div><div class='track_artist_song'><h3 style='margin-top: 10px;'>" + artist +"</h3><h2>" + track + "</h2></div><div value= '" + reducedCount +"' state='0' class='track_rating'>0</div></div>");
                         $("#now_playing").delay(500).text($(".track_artist_song").first().find("h3").text() + " - " + $(".track_artist_song").first().find("h2").text());
                     } else
-                        $("#playlist").append("<div class='playlist_track'><div class='track_num'>"+ count +"</div><div class='track_artist_song'><h3 style='margin-top: 10px;'>" + artist +"</h3><h2>" + track + "</h2></div><div value= '" + reducedCount +"' class='track_rating'>0</div></div>");
+                        $("#playlist").append("<div class='playlist_track'><div class='track_num'>"+ count +"</div><div class='track_artist_song'><h3 style='margin-top: 10px;'>" + artist +"</h3><h2>" + track + "</h2></div><div value= '" + reducedCount +"' state='0' class='track_rating'>0</div></div>");
 
                     count++;
                     hideSearch();
@@ -189,20 +189,23 @@
                 
                 function rateTrack($id) {
                     var curr = "";
-                    if($id.css("color") == "rgb(0, 0, 0)") {
+                    if($id.attr("state") == 0) {
                         $id.css("color", "#00a651");
                         curr = parseInt($id.text()) + 1;
+                        $id.attr("state", 1);
                         return curr;
-                    } else if($id.css("color") == "rgb(0, 166, 81)") {
+                    } else if($id.attr("state") == 1) {
                         $id.css("color", "#ff0000");
                         curr = parseInt($id.text()) - 2;
+                        $id.attr("state", 2);
                         
                         // removeVideo($id);      
                         
                         return curr;                            
-                    } else if($id.css("color") == "rgb(255, 0, 0)") {
+                    } else if($id.attr("state") == 2) {
                         $id.css("color", "#000000");
                         curr = parseInt($id.text()) + 1;
+                        $id.attr("state") = 0;
                         return curr;
                     }
                 }
