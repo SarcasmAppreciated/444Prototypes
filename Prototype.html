@@ -154,7 +154,7 @@
                     
                     console.log(player.getPlaylistIndex());
                     console.log(player.getCurrentTime());
-                    setTimout(function(){
+                    setTimeout(function(){
                         player.loadPlaylist({list: getPlaylistID(),
                         listType:"playlist",
                         index:player.getPlaylistIndex(),
