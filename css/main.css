@@ -61,7 +61,7 @@ h1#start_up {
     height:64px;
     display: inline-block;
     margin-top: 150px;
-    margin-bottom: 250px;
+    margin-bottom: 200px;
     background: url("../images/logo.png") center no-repeat;
 }
 
@@ -73,6 +73,10 @@ button.start_screen_button {
     border-radius: 2px;
     background-color: #e6e6e6;
     cursor: pointer;
+}
+
+#login-link {
+    margin-bottom: 20px;
 }
 
 button.start_screen_button :active {
@@ -217,7 +221,7 @@ button.start_screen_button p {
 }
 
 .track_artist_song {
-    width: 200px;
+    width: 250px;
     height: 60px;
     float: left;
     margin-left: 10px;
@@ -227,7 +231,7 @@ button.start_screen_button p {
 }
 
 .track_rating {
-    width: 60px;
+    width: 80px;
     height: 60px;
     float: left;
     text-align: center;

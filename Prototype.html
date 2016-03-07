@@ -30,8 +30,6 @@
                     <div>
                         <div id="logo"></div>
                         <button class="start_screen_button" id="login-link"><p>Login</p></button>
-                        <br/>
-                        <br/>
                         <button class="start_screen_button" id="playlist-button" disabled onclick="createPlaylist()"><p>Create Playlist</p></button>
                     </div>
                 </div>
@@ -144,9 +142,9 @@
                     var track = $(this).attr("track");
                     
                     if(count == 1)
-                        $("#playlist").append("<div class='playlist_track'><div class='track_num'>></div></div><div class='track_artist_song'><h3 style='margin-top: 10px;'>" + artist +"</h3><h2>" + track + "</h2></div><div class='track_rating'>0</div></div>");
+                        $("#playlist").append("<div class='playlist_track'><div class='track_num'>></div><div class='track_artist_song'><h3 style='margin-top: 10px;'>" + artist +"</h3><h2>" + track + "</h2></div><div class='track_rating'>0</div></div>");
                     else
-                        $("#playlist").append("<div class='playlist_track'><div class='track_num'>"+ count +"</div></div><div class='track_artist_song'><h3 style='margin-top: 10px;'>" + artist +"</h3><h2>" + track + "</h2></div><div class='track_rating'>0</div></div>");
+                        $("#playlist").append("<div class='playlist_track'><div class='track_num'>"+ count +"</div><div class='track_artist_song'><h3 style='margin-top: 10px;'>" + artist +"</h3><h2>" + track + "</h2></div><div class='track_rating'>0</div></div>");
 
                     count++;
                     hideSearch();
