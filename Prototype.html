@@ -32,7 +32,7 @@
                         <button class="start_screen_button" id="login-link"><p>Login</p></button>
                         <br/>
                         <br/>
-                        <button class="start_screen_button" id="playlist-button" disabled onclick="createPlaylist()"><p>Create Playlist</p></button>
+                        <button class="start_screen_button" id="playlist-button" onclick="createPlaylist()"><p>Create Playlist</p></button>
                     </div>
                 </div>
                 <div class="full_screen">
@@ -132,8 +132,7 @@
                 })
 
                 $(".result_track").click(function(){
-                    alert($(this).val());
-                    addVideoToPlaylist($(this).val());
+                    addVideoToPlaylist($(this).attr("value"));
                     $("#playlist").append("<div class='playlist_track'><div class='track_num'>9</div><div class='track_pic'></div><div class='track_artist_song'><h3 style='margin-top: 10px;'>ODESZA</h3><h2>WHITE LIES (FEAT. JENNI POTTS)</h2></div><div class='track_rating'>0</div></div>");
                     hideSearch();
                 });

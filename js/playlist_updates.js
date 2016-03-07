@@ -17,7 +17,7 @@ function createPlaylist() {
     part: 'snippet,status',
     resource: {
       snippet: {
-        title: 'Your Custom Playlist',
+        title: 'Querate Custom Playlist',
         description: 'A public playlist created for you and your friends'
       },
       status: {
