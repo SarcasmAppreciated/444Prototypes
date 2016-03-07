@@ -99,8 +99,7 @@
                         width: '640',
                         videoId: 'M7lc1UVf-VE',
                         events: {
-                            'onReady': onPlayerReady,
-                            'onStateChange': onPlayerStateChange
+                            'onReady': onPlayerReady
                         }
                     });
                 }
@@ -108,8 +107,6 @@
                 function onPlayerReady(event) {
                     event.target.playVideo();
                 }
-                
-                
 
                 $("#play").click(function(){
                     if(isPlaying) {
