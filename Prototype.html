@@ -17,11 +17,9 @@
         <link rel="stylesheet" href="css/main.css">
 		
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-        <script src="http://vjs.zencdn.net/5.7.1/video.min.js"></script>
         <script src="js/auth.js"></script>
         <script src="js/playlist_updates.js"></script>
         <script src="https://apis.google.com/js/client.js?onload=googleApiClientReady"></script>
-        <script src="js/Youtube.js"></script>
     </head>
     <body>
         <div id="phone">
@@ -80,51 +78,54 @@
                 </div>
             </div>            
         </div>
-        <audio
-            id="testYT"
-            class="video-js"
-            controls
-            width="640" height="264"
-            data-setup='{ "techOrder": ["youtube"], "sources": [{ "type": "video/youtube", "src": "https://www.youtube.com/watch?v=YykjpeuMNEk"}]}'
-                    >
-        </audio>
         <script>        
             // https://developers.google.com/youtube/v3/code_samples/javascript
             // https://developers.google.com/youtube/v3/guides/implementation/playlists#playlistItems-update
         
             $( document).ready(function (){
-                var isPlaying = false;                                            
+                var isPlaying = false;                                          
                 
-                function modifyPlaylist(trackID) {
-                    $("#testYT").attr("data-setup", "{ 'techOrder': ['youtube'], 'sources': [{ 'type': 'video/youtube', 'src': 'https://www.youtube.com/watch?v=" + trackID + "&list=" + getPlaylistID() + "'}]}");
-                    instantiatePlaylist();
-                }
+                var tag = document.createElement('script');
 
-                function instantiatePlaylist() {
-                    alert();
-                    var ytPlayer = videojs('testYT', {}, function() {
+                tag.src = "https://www.youtube.com/iframe_api";
+                var firstScriptTag = document.getElementsByTagName('script')[0];
+                firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
                 
-                        this.on('ended', function() {
-                            ytPlayer.play(); //.currentTime(0);
-                        });                 
-                    });
-
-                    $("#play").click(function(){
-                        if(isPlaying) {
-                            ytPlayer.pause();
-                            isPlaying = false;
-                            $(".fa-play").removeClass("fa-pause");                        
-                        } else {
-                            ytPlayer.play();
-                            isPlaying = true;
-                            $(".fa-play").addClass("fa-pause");
+                var player;
+                function onYouTubeIframeAPIReady() {
+                    player = new YT.Player('player', {
+                        height: '390',
+                        width: '640',
+                        videoId: 'M7lc1UVf-VE',
+                        events: {
+                            'onReady': onPlayerReady,
+                            'onStateChange': onPlayerStateChange
                         }
                     });
-                    
-                    $("#skip").click(function(){
-                        ytPlayer.play().currentTime(ytPlayer.duration());
-                    });                
                 }
+                
+                function onPlayerReady(event) {
+                    event.target.playVideo();
+                }
+                
+                
+
+                $("#play").click(function(){
+                    if(isPlaying) {
+                        // player.pause();
+                        isPlaying = false;
+                        $(".fa-play").removeClass("fa-pause");                        
+                    } else {
+                        // player.play();
+                        isPlaying = true;
+                        $(".fa-play").addClass("fa-pause");
+                    }
+                });
+                
+                $("#skip").click(function(){
+                    
+                });                
+                
                                   
             
                 $("#playlist-button").click(function(){
@@ -150,7 +151,6 @@
                     var track = $(this).attr("track");
                     
                     if(count == 1) {
-                        modifyPlaylist(trackID);
                         $("#playlist").append("<div class='playlist_track'><div class='track_num'>></div><div class='track_artist_song'><h3 style='margin-top: 10px;'>" + artist +"</h3><h2>" + track + "</h2></div><div class='track_rating'>0</div></div>");
                     } else
                         $("#playlist").append("<div class='playlist_track'><div class='track_num'>"+ count +"</div><div class='track_artist_song'><h3 style='margin-top: 10px;'>" + artist +"</h3><h2>" + track + "</h2></div><div class='track_rating'>0</div></div>");
