@@ -124,8 +124,15 @@
                 
                 $("#skip").click(function(){
                     player.nextVideo();                    
-                    $(".playlist_track").first().remove();
+                    nowPlaying();
                 });
+            }
+            
+
+            function onPlayerStateChange(event) {
+                if (event.data == YT.PlayerState.ENDED) {
+                    nowPlaying();
+                }
             }
             
             
@@ -163,7 +170,7 @@
                     $(".fa-play").addClass("fa-pause");
                     
                     if(count == 1) {                        
-                        $("#playlist").append("<div class='playlist_track'><div class='track_num'>></div><div class='track_artist_song'><h3 style='margin-top: 10px;'>" + artist +"</h3><h2>" + track + "</h2></div><div class='track_rating'>0</div></div>");
+                        $("#playlist").append("<div class='playlist_track'><div class='track_num'>1</div><div class='track_artist_song'><h3 style='margin-top: 10px;'>" + artist +"</h3><h2>" + track + "</h2></div><div class='track_rating'>0</div></div>");
                     } else
                         $("#playlist").append("<div class='playlist_track'><div class='track_num'>"+ count +"</div><div class='track_artist_song'><h3 style='margin-top: 10px;'>" + artist +"</h3><h2>" + track + "</h2></div><div class='track_rating'>0</div></div>");
 
@@ -182,6 +189,11 @@
                 $(".fa-check-square").click(function(){
                     $("#collab_field").fadeOut("slow");
                 });
+                
+                function nowPlaying() {
+                    $(".playlist_track").first().remove();
+                    $(".track_num").delay(500).first().text(">");
+                }
                 
                 function hideSearch() {
                     $("#search_area").fadeOut("slow");
