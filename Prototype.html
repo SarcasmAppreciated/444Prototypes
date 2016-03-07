@@ -126,15 +126,13 @@
                     player.nextVideo();                    
                     nowPlaying();
                 });
-            }
-            
+            }            
 
             function onPlayerStateChange(event) {
                 if (event.data == YT.PlayerState.ENDED) {
                     nowPlaying();
                 }
-            }
-            
+            }            
             
             $( document).ready(function (){            
                 $("#playlist-button").click(function(){
@@ -170,7 +168,7 @@
                     $(".fa-play").addClass("fa-pause");
                     
                     if(count == 1) {                        
-                        $("#playlist").append("<div class='playlist_track'><div class='track_num'>1</div><div class='track_artist_song'><h3 style='margin-top: 10px;'>" + artist +"</h3><h2>" + track + "</h2></div><div class='track_rating'>0</div></div>");
+                        $("#playlist").append("<div class='playlist_track'><div class='track_num'>></div><div class='track_artist_song'><h3 style='margin-top: 10px;'>" + artist +"</h3><h2>" + track + "</h2></div><div class='track_rating'>0</div></div>");
                     } else
                         $("#playlist").append("<div class='playlist_track'><div class='track_num'>"+ count +"</div><div class='track_artist_song'><h3 style='margin-top: 10px;'>" + artist +"</h3><h2>" + track + "</h2></div><div class='track_rating'>0</div></div>");
 
