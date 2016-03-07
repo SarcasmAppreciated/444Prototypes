@@ -76,7 +76,7 @@ function addToPlaylist(id, startPos, endPos) {
 }
 
 // Retrieve the list of videos in the specified playlist.
-function requestVideoPlaylist(playlistId, pageToken) {
+function requestVideoPlaylist(playlistId, index, pageToken) {
   $('#video-container').html('');
   var requestOptions = {
     playlistId: playlistId,
@@ -89,9 +89,7 @@ function requestVideoPlaylist(playlistId, pageToken) {
   var request = gapi.client.youtube.playlistItems.list(requestOptions);
   request.execute(function(response) {
     var playlistItems = response.items;
-    
-    for (var i = 0; i < playlistItems.length; i++)
-        console.log(playlistItems[i].id);    
+    console.log(playlistItems[index].id);    
   });
 }
 
