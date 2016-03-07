@@ -182,7 +182,7 @@
                     count++;
                     hideSearch();
                     
-                    $(".track_rating").click(function(){
+                    $(".track_rating").unbind('click').click(function(){
                         $(this).text(rateTrack($(this)));
                     });
                 });                
