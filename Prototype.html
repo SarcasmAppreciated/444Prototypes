@@ -85,12 +85,10 @@
             class="video-js"
             controls
             width="640" height="264"
-            data-setup='{ "techOrder": ["youtube"], "sources": [{ "type": "video/youtube", "src": "https://www.youtube.com/watch?v=YykjpeuMNEk"}]}'
+            data-setup='{}'
                     >
         </audio>
-        <script>
-            /**/
-        
+        <script>        
             // https://developers.google.com/youtube/v3/code_samples/javascript
             // https://developers.google.com/youtube/v3/guides/implementation/playlists#playlistItems-update
         
@@ -112,8 +110,7 @@
                             ytPlayer.pause();
                             isPlaying = false;
                             $(".fa-play").removeClass("fa-pause");                        
-                        }
-                        else {
+                        } else {
                             ytPlayer.play();
                             isPlaying = true;
                             $(".fa-play").addClass("fa-pause");
