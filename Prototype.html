@@ -248,6 +248,10 @@
                     }, 2000);
                     
                     count--;
+                    
+                    $(".track_rating").each(function(index, item){
+                        $(this).attr("value", index);
+                    });
                 }
                                 
                 function hideSearch() {
