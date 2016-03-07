@@ -94,15 +94,9 @@ function requestVideoPlaylist(playlistId, index, pageToken) {
   
 }
 
-function removeFromPlaylist(pid, playlistId) {  
+function removeFromPlaylist(pid) {  
   var request = gapi.client.youtube.playlistItems.delete({
-    part: 'snippet',
-    resource: {
-      id: pid,
-      snippet: {
-        playlistId: playlistId,
-      }
-    }
+    id: pid
   });
   request.execute(function(response) {
     $('#status').html('<pre>' + JSON.stringify(response.result) + '</pre>');
