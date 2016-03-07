@@ -183,31 +183,36 @@
                     hideSearch();
                     
                     $(".track_rating").click(function(){
-                        rateTrack($(this));
+                        $(this).text(rateTrack($(this)));
                     });
                 });                
                 
-                function rateTrack($id) {                    
+                function rateTrack($id) {
+                    var curr = "";
                     if($id.css("color") == "rgb(0, 0, 0)") {
                         $id.css("color", "#00a651");
-                        var curr = parseInt($id.text()) + 1;
-                        $id.text(curr);
+                        curr = parseInt($id.text()) + 1;
+                        return curr;
                     } else if($id.css("color") == "rgb(0, 166, 81)") {
                         $id.css("color", "#ff0000");
-                        var curr = parseInt($id.text()) - 2;
-                        $id.text(curr);
+                        curr = parseInt($id.text()) - 2;
                         
-                        requestVideoPlaylist(getPlaylistID(), $id.attr("value"));
-                        setTimeout(function(){
-                            removeFromPlaylist($("#delete_item").text());
-                            $id.parent().remove();
-                        }, 1000);                        
+                        // removeVideo($id);      
                         
+                        return curr;                            
                     } else if($id.css("color") == "rgb(255, 0, 0)") {
                         $id.css("color", "#000000");
-                        var curr = parseInt($id.text()) + 1;
-                        $id.text(curr);
+                        curr = parseInt($id.text()) + 1;
+                        return curr;
                     }
+                }
+                
+                function removeVideo($id) {
+                    requestVideoPlaylist(getPlaylistID(), $id.attr("value"));
+                    setTimeout(function(){
+                        removeFromPlaylist($("#delete_item").text());
+                        $id.parent().remove();
+                    }, 1000);                
                 }
               
                 $("#cancel").click(function(){
