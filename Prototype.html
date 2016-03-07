@@ -96,10 +96,8 @@
                 var isPlaying = false;                                            
                 
                 function modifyPlaylist(trackID) {
-                    $("#testYT").attr("data-setup", function() {
-                        return "{ 'techOrder': ['youtube'], 'sources': [{ 'type': 'video/youtube', 'src': 'https://www.youtube.com/watch?v=" + trackID + "&list=" + getPlaylistID() + "'}]}"; 
-                        instantiatePlaylist();
-                    });                    
+                    $("#testYT").attr("data-setup", "{ 'techOrder': ['youtube'], 'sources': [{ 'type': 'video/youtube', 'src': 'https://www.youtube.com/watch?v=" + trackID + "&list=" + getPlaylistID() + "'}]}");
+                    instantiatePlaylist();
                 }
 
                 function instantiatePlaylist() {
