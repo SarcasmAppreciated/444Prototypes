@@ -44,7 +44,7 @@
                 </div>
                 <div id="collab_field">
                     <p>Share this link!</p>
-                    <input placeholder="http://benson.li/444Prototypes/Prototype.html"></input><div class="fa fa-check-square fa-2x"></div>
+                    <input value="" id="playlist-id"></input><div class="fa fa-check-square fa-2x"></div>
                 </div>
                 <div id="active_area">
                     <div id="search_area">
@@ -85,7 +85,7 @@
             class="video-js"
             controls
             width="640" height="264"
-            data-setup='{ "techOrder": ["youtube"], "sources": [{ "type": "video/youtube", "src": "https://www.youtube.com/watch?v=QtLXvh8mv3o&list=PL5qjstFaIeLxDL4JOwrOHao66Av7PItYH&index=1"}]}'
+            
         >
         </audio>
         <script>
@@ -95,7 +95,8 @@
             $( document).ready(function (){
                 var isPlaying = false;                             
                 
-                var ytPlayer = videojs('testYT', { /* Options */ }, function() {                    
+                var ytPlayer = videojs('testYT', { data-setup='{ "techOrder": ["youtube"], "sources": [{ "type": "video/youtube", "src": "https://www.youtube.com/watch?v=QtLXvh8mv3o&list=PL5qjstFaIeLxDL4JOwrOHao66Av7PItYH&index=1"}]}' }, function() {
+                
                     this.on('ended', function() {
                         ytPlayer.play(); //.currentTime(0);
                     });                 

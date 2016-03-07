@@ -29,7 +29,7 @@ function createPlaylist() {
     var result = response.result;
     if (result) {
       playlistId = result.id;
-      $('#playlist-id').val(playlistId);
+      $('#playlist-id').val("https://www.youtube.com/playlist?list=" + playlistId);
       $('#playlist-title').html(result.snippet.title);
       $('#playlist-description').html(result.snippet.description);
     } else {
