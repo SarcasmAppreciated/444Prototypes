@@ -189,24 +189,23 @@
                 
                 function rateTrack($id) {
                     var curr = "";
+                    curr = parseInt($id.text()) + 1;
+                    
                     if($id.attr("state") == 0) {
-                        $id.css("color", "#00a651");
-                        curr = parseInt($id.text()) + 1;
+                        $id.css("color", "#00a651");                        
                         $id.attr("state", 1);
                         return curr;
                     } else if($id.attr("state") == 1) {
                         $id.css("color", "#ff0000");
-                        curr = parseInt($id.text()) - 2;
                         $id.attr("state", 2);
                         
-                        // removeVideo($id);      
+                        removeVideo($id);      
                         
-                        return curr;                            
+                        return -1 * curr;                            
                     } else if($id.attr("state") == 2) {
-                        $id.css("color", "#000000");
-                        curr = parseInt($id.text()) + 1;
-                        $id.attr("state", 0);
-                        return curr;
+                        $id.css("color", "#00a651");
+                        $id.attr("state", 1);
+                        return -1 * curr;
                     }
                 }
                 
