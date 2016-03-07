@@ -80,9 +80,6 @@
         </div>
         <div id="player"></div>
         <script>        
-            // https://developers.google.com/youtube/iframe_api_reference
-            // https://developers.google.com/youtube/v3/guides/implementation/playlists#playlistItems-update
-            
             var isPlaying = false;
             var player;
             
@@ -153,11 +150,17 @@
                     $("#search_area").fadeIn("slow");
                     $("#collab_field").fadeOut("slow");
                 })
+
+                var trackID;
                 
-                var count = 1;
+                $(".track_rating").click(function(){
+                    getItemPlaylistID(trackID);
+                });
                 
+                
+                var count = 1;  
                 $(".result_track").click(function(){
-                    var trackID = $(this).attr("value")
+                    trackID = $(this).attr("value")
                     addVideoToPlaylist(trackID);
                    
                     var artist = $(this).attr("artist");

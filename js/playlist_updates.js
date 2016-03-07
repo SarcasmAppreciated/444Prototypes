@@ -75,3 +75,20 @@ function addToPlaylist(id, startPos, endPos) {
   });
 }
 
+function getItemPlaylistID(id) {
+
+  var request = gapi.client.youtube.playlistItems.list({
+    part: 'snippet',
+    resource: {
+      snippet: {
+        playlistId: playlistId,
+        videoId: id
+      }
+    }
+  });
+  request.execute(function(response) {
+        var result = response.result;
+        console.log(result);    
+  });
+}
+
