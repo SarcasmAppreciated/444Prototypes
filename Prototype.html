@@ -188,9 +188,8 @@
                         checkRating ($(this).text(), $(this));
                     });
                     
-                    var valCount = 0;
                     $(".track_rating").each(function(index, item){
-                        $(".track_rating").attr("value", index);
+                        $(this).attr("value", index);
                     });
                 });                
 
