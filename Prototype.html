@@ -104,7 +104,8 @@
                         list: 'PL5qjstFaIeLy-MxnFh9nKj3JRRLYACQxv'
                     },
                     events: {
-                        'onReady': onPlayerReady
+                        'onReady': onPlayerReady,
+                        'onStateChange': onPlayerStateChange
                     }
                 });
             }
@@ -137,7 +138,6 @@
             function nowPlaying() {                
                 $(".playlist_track").first().remove();
                 $(".track_num").delay(500).first().text(">");
-                alert($(".track_artist_song").first().find("h3").text());
                 $("#now_playing").delay(500).text($(".track_artist_song").first().find("h3").text() + " - " + $(".track_artist_song").first().find("h2").text());
             }
             
@@ -174,7 +174,8 @@
                     isPlaying = true;
                     $(".fa-play").addClass("fa-pause");
                     
-                    if(count == 1) {                        
+                    if(count == 1) {
+                        $("#now_playing").text($(".track_artist_song").first().find("h3").text() + " - " + $(".track_artist_song").first().find("h2").text());
                         $("#playlist").append("<div class='playlist_track'><div class='track_num'>></div><div class='track_artist_song'><h3 style='margin-top: 10px;'>" + artist +"</h3><h2>" + track + "</h2></div><div class='track_rating'>0</div></div>");
                     } else
                         $("#playlist").append("<div class='playlist_track'><div class='track_num'>"+ count +"</div><div class='track_artist_song'><h3 style='margin-top: 10px;'>" + artist +"</h3><h2>" + track + "</h2></div><div class='track_rating'>0</div></div>");
