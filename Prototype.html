@@ -189,11 +189,20 @@
                 
                 
                 function rateTrack($id) {
+                    console.log($id.css("color"));
                     if($id.css("color") == "rgb(0, 0, 0)") {
                         $id.css("color", "#00a651");
                         var curr = parseInt($id.text()) + 1;
                         $id.text(curr);
-                    }               
+                    } else if($id.css("color") == "rgb(0, 166, 81)") {
+                        $id.css("color", "#ff0000");
+                        var curr = parseInt($id.text()) - 2;
+                        $id.text(curr);
+                    } else if($id.css("color") == "rgb(255, 0, 0)") {
+                        $id.css("color", "#000000");
+                        var curr = parseInt($id.text()) + 1;
+                        $id.text(curr);
+                    }
                 }
                 
                 
