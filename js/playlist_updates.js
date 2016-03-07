@@ -17,8 +17,8 @@ function createPlaylist() {
     part: 'snippet,status',
     resource: {
       snippet: {
-        title: 'Test Playlist',
-        description: 'A private playlist created with the YouTube API'
+        title: 'Your Custom Playlist',
+        description: 'A public playlist created for you and your friends'
       },
       status: {
         privacyStatus: 'public'
