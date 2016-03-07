@@ -89,28 +89,16 @@ function requestVideoPlaylist(playlistId, pageToken) {
   var request = gapi.client.youtube.playlistItems.list(requestOptions);
   request.execute(function(response) {
     var playlistItems = response.items;
+    var count = 0;
+    console.log( playlistItems.items.item[count].id );
+    console.log( playlistItems.items[count].id );
+    console.log( playlistItems.item[count].id );
+    count++;
     
-    console.log('ids', traverse(playlistItems));
-    // console.log( playlistItems );
     /*$.each( playlistItems, function( index, item ) {
         console.log( item.id );
     } );*/
   });
-}
-
-function traverse(obj) {
-    var ids = [];
-    for (var prop in obj) {
-        if (typeof obj[prop] == "object" && obj[prop]) {
-            if (prop == 'id') {
-                ids = obj[prop].map(function(elem){
-                   return elem.id;
-               })
-            }
-            ids =ids.concat(traverse(obj[prop]));
-        }
-    }
-    return ids;
 }
 
 
