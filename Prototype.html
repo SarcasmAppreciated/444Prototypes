@@ -88,7 +88,8 @@
             tag.src = "https://www.youtube.com/iframe_api";
             var firstScriptTag = document.getElementsByTagName('script')[0];
             firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
+            
+            var isPlaying = false;
             var player;
             function onYouTubeIframeAPIReady() {
                 player = new YT.Player('player', {
@@ -106,13 +107,6 @@
             }
 
             function onPlayerReady(event) {
-                // event.target.playVideo();
-            }        
-        
-        
-            $( document).ready(function (){
-                var isPlaying = false;                                          
-
                 $("#play").click(function(){
                     if(isPlaying) {
                         player.pauseVideo();
@@ -127,10 +121,11 @@
                 
                 $("#skip").click(function(){
                     player.nextVideo();
-                });                
-                
-                                  
-            
+                });
+            }        
+        
+        
+            $( document).ready(function (){                                          
                 $("#playlist-button").click(function(){
                     $("#start_screen").fadeOut("slow", function(){
                         $(".full_screen").delay(500).fadeOut("slow");
@@ -142,7 +137,6 @@
                     $("#search_area").fadeIn("slow");
                     $("#collab_field").fadeOut("slow");
                 })
-                
                 
                 var count = 1;
                 
