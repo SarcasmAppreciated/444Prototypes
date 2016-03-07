@@ -85,7 +85,7 @@
             class="video-js"
             controls
             width="640" height="264"
-            data-setup='{ "techOrder": ["youtube"], "sources": [{ "type": "video/youtube", "src": "https://www.youtube.com/playlist?list=PL5qjstFaIeLwa0UopltsB04b5veoTb5uA"}]}'
+            data-setup='{ "techOrder": ["youtube"], "sources": [{ "type": "video/youtube", "src": "https://www.youtube.com/watch?v=YykjpeuMNEk&list=PL5qjstFaIeLwa0UopltsB04b5veoTb5uA&index=1"}]}'
         >
         </audio>
         <script>
@@ -95,35 +95,36 @@
             $( document).ready(function (){
                 var isPlaying = false;                             
                 
-                var ytPlayer = videojs('testYT', {}, function() {
+                function instantiatePlaylist() {
+                    var ytPlayer = videojs('testYT', {}, function() {
                 
-                    this.on('ended', function() {
-                        ytPlayer.play(); //.currentTime(0);
-                    });                 
-                });
+                        this.on('ended', function() {
+                            ytPlayer.play(); //.currentTime(0);
+                        });                 
+                    });
 
-                $("#play").click(function(){
-                    if(isPlaying) {
-                        ytPlayer.pause();
-                        isPlaying = false;
-                        $(".fa-play").removeClass("fa-pause");                        
-                    }
-                    else {
-                        ytPlayer.play();
-                        isPlaying = true;
-                        $(".fa-play").addClass("fa-pause");
-                    }
-                });
-                
-                $("#skip").click(function(){
-                    console.log(ytPlayer.currentSrc());
-                    ytPlayer.play().currentTime(ytPlayer.duration());
-                });
+                    $("#play").click(function(){
+                        if(isPlaying) {
+                            ytPlayer.pause();
+                            isPlaying = false;
+                            $(".fa-play").removeClass("fa-pause");                        
+                        }
+                        else {
+                            ytPlayer.play();
+                            isPlaying = true;
+                            $(".fa-play").addClass("fa-pause");
+                        }
+                    });
+                    
+                    $("#skip").click(function(){
+                        ytPlayer.play().currentTime(ytPlayer.duration());
+                    });
+                }            
                                   
             
                 $("#playlist-button").click(function(){
                     $("#start_screen").fadeOut("slow", function(){
-                        $(".full_screen").delay(1000).fadeOut("slow");
+                        $(".full_screen").delay(500).fadeOut("slow");
                     });                    
                 });                
             
@@ -142,9 +143,10 @@
                     var artist = $(this).attr("artist");
                     var track = $(this).attr("track");
                     
-                    if(count == 1)
+                    if(count == 1) {
+                        instantiatePlaylist();
                         $("#playlist").append("<div class='playlist_track'><div class='track_num'>></div><div class='track_artist_song'><h3 style='margin-top: 10px;'>" + artist +"</h3><h2>" + track + "</h2></div><div class='track_rating'>0</div></div>");
-                    else
+                    } else
                         $("#playlist").append("<div class='playlist_track'><div class='track_num'>"+ count +"</div><div class='track_artist_song'><h3 style='margin-top: 10px;'>" + artist +"</h3><h2>" + track + "</h2></div><div class='track_rating'>0</div></div>");
 
                     count++;
