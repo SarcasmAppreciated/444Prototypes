@@ -75,7 +75,6 @@ function addToPlaylist(id, startPos, endPos) {
   });
 }
 
-var count = 0;
 // Retrieve the list of videos in the specified playlist.
 function requestVideoPlaylist(playlistId, pageToken) {
   $('#video-container').html('');
@@ -91,8 +90,8 @@ function requestVideoPlaylist(playlistId, pageToken) {
   request.execute(function(response) {
     var playlistItems = response.items;
     
-    console.log(playlistItems[count].id);
-    count++;
+    for (var i = 0; i < playlistItems.length; i++)
+        console.log(playlistItems[i].id);    
   });
 }
 
