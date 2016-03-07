@@ -150,15 +150,17 @@
                     addVideoToPlaylist(trackID);
                    
                     var artist = $(this).attr("artist");
-                    var track = $(this).attr("track");
+                    var track = $(this).attr("track");                    
                     
                     console.log(player.getPlaylistIndex());
                     console.log(player.getCurrentTime());
-                    player.loadPlaylist({list: getPlaylistID(),
+                    setTimout(function(){
+                        player.loadPlaylist({list: getPlaylistID(),
                         listType:"playlist",
                         index:player.getPlaylistIndex(),
                         startSeconds: player.getCurrentTime(),
-                        suggestedQuality:"default"});
+                        suggestedQuality:"default"});                   
+                    }, 1000);                    
                     
                     if(count == 1) {                        
                         $("#playlist").append("<div class='playlist_track'><div class='track_num'>></div><div class='track_artist_song'><h3 style='margin-top: 10px;'>" + artist +"</h3><h2>" + track + "</h2></div><div class='track_rating'>0</div></div>");
