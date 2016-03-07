@@ -85,7 +85,7 @@
             class="video-js"
             controls
             width="640" height="264"
-            
+            data-setup='{ "techOrder": ["youtube"], "sources": [{ "type": "video/youtube", "src": "https://www.youtube.com/watch?v=QtLXvh8mv3o&list=PL5qjstFaIeLxDL4JOwrOHao66Av7PItYH&index=1"}]}'
         >
         </audio>
         <script>
@@ -95,7 +95,7 @@
             $( document).ready(function (){
                 var isPlaying = false;                             
                 
-                var ytPlayer = videojs('testYT', { data-setup='{ "techOrder": ["youtube"], "sources": [{ "type": "video/youtube", "src": "https://www.youtube.com/watch?v=QtLXvh8mv3o&list=PL5qjstFaIeLxDL4JOwrOHao66Av7PItYH&index=1"}]}' }, function() {
+                var ytPlayer = videojs('testYT', {}, function() {
                 
                     this.on('ended', function() {
                         ytPlayer.play(); //.currentTime(0);
