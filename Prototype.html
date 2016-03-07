@@ -171,7 +171,7 @@
                     isPlaying = true;
                     $(".fa-play").addClass("fa-pause");
                    
-                    var reducedCount = count - 1;
+                    var reducedCount = 0; 
                     
                     if(count == 1) {
                         $("#playlist").append("<div class='playlist_track'><div class='track_num'>></div><div class='track_artist_song'><h3 style='margin-top: 10px;'>" + artist +"</h3><h2>" + track + "</h2></div><div value= '" + reducedCount +"' state='0' class='track_rating'>0</div></div>");
@@ -186,6 +186,12 @@
                         $(this).text(rateTrack($(this)));
                         
                         checkRating ($(this).text(), $(this));
+                    });
+                    
+                    var valCount = 0;
+                    $.each($(".track_rating"), function(){
+                        $(".track_rating").attr("value", valCount);
+                        valCount++;
                     });
                 });                
 
@@ -244,11 +250,6 @@
                     }, 2000);
                     
                     count--;
-                    
-                    $.each($(".track_rating"), function(){
-                        var val = parseInt($(".track_rating").attr("value")) - 1;
-                        $(".track_rating").attr("value", val);
-                    });
                 }
                                 
                 function hideSearch() {
