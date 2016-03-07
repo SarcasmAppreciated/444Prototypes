@@ -205,7 +205,7 @@
                     } else if($id.attr("state") == 2) {
                         $id.css("color", "#000000");
                         curr = parseInt($id.text()) + 1;
-                        $id.attr("state") = 0;
+                        $id.attr("state", 0);
                         return curr;
                     }
                 }
