@@ -259,7 +259,7 @@ button.start_screen_button p {
    cursor: pointer;
 }
 
-#player {
+#player, #delete_item {
     display: none;
 }
 

@@ -75,8 +75,6 @@ function addToPlaylist(id, startPos, endPos) {
   });
 }
 
-
-
 // Retrieve the list of videos in the specified playlist.
 function requestVideoPlaylist(playlistId, index, pageToken) {
   var pIID;
@@ -94,6 +92,21 @@ function requestVideoPlaylist(playlistId, index, pageToken) {
     $("#delete_item").text(playlistItems[index].id);
   });
   
+}
+
+function removeFromPlaylist(pid, playlistId) {  
+  var request = gapi.client.youtube.playlistItems.delete({
+    part: 'snippet',
+    resource: {
+      id: pid,
+      snippet: {
+        playlistId: playlistId,
+      }
+    }
+  });
+  request.execute(function(response) {
+    $('#status').html('<pre>' + JSON.stringify(response.result) + '</pre>');
+  });
 }
 
 
