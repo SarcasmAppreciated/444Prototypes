@@ -183,10 +183,23 @@
                     hideSearch();
                     
                     $(".track_rating").click(function(){
-                        var index = $(this).attr("value");
-                        requestVideoPlaylist(getPlaylistID(), index);
+                        rateTrack($(this).id);
                     });
                 });
+                
+                
+                function rateTrack(id) {
+                    alert($id.css("color"));
+                
+                }
+                
+                
+                
+                // var index = $(this).attr("value");
+                // requestVideoPlaylist(getPlaylistID(), index);
+                
+                
+                // removeFromPlaylist($("#delete_item").text());
               
                 $("#cancel").click(function(){
                     hideSearch();
@@ -194,8 +207,6 @@
                 
                 $("#collaborate").click(function(){
                     $("#collab_field").fadeIn("slow");
-                    
-                    removeFromPlaylist($("#delete_item").text());
                 });
                 
                 $(".fa-check-square").click(function(){
