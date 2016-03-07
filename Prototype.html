@@ -183,13 +183,13 @@
                     hideSearch();
                     
                     $(".track_rating").click(function(){
-                        rateTrack($(this).id);
+                        rateTrack($(this));
                     });
                 });
                 
                 
-                function rateTrack(id) {
-                    alert(id.css("color"));
+                function rateTrack($id) {
+                    alert($id.css("color"));
                 
                 }
                 
