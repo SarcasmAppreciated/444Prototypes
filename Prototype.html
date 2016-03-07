@@ -236,7 +236,7 @@
                         if($id.parent().find(".track_num").text() == ">") {
                             $id.parent().next().find(".track_num").text(">");
                             player.nextVideo();
-                            $("#now_playing").delay(1000).text($(".track_artist_song").first().find("h3").text() + " - " + $(".track_artist_song").first().find("h2").text());
+                            $("#now_playing").delay(2000).text($(".track_artist_song").first().find("h3").text() + " - " + $(".track_artist_song").first().find("h2").text());
                         }
                         $id.parent().remove();                        
                     }, 1000);
