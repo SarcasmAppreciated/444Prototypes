@@ -75,20 +75,30 @@ function addToPlaylist(id, startPos, endPos) {
   });
 }
 
-function getItemPlaylistID(id) {
-
-  var request = gapi.client.youtube.playlistItems.list({
+// Retrieve the list of videos in the specified playlist.
+function requestVideoPlaylist(playlistId, pageToken) {
+  $('#video-container').html('');
+  var requestOptions = {
+    playlistId: playlistId,
     part: 'snippet',
-    resource: {
-      snippet: {
-        playlistId: playlistId,
-        videoId: id
-      }
-    }
-  });
+    maxResults: 50
+  };
+  if (pageToken) {
+    requestOptions.pageToken = pageToken;
+  }
+  var request = gapi.client.youtube.playlistItems.list(requestOptions);
   request.execute(function(response) {
-        var result = response.result;
-        console.log(result);    
+    var playlistItems = response.items;
+
+    console.log( playlistItems.length, playlistItems );
+    $.each( playlistItems, function( index, item ) {
+        displayResult( item.snippet.title );
+    } );
+
+    if ( response.nextPageToken ) {
+        console.log( response.nextPageToken );
+        getPlaylistItems( playlistId, maxResults, response.nextPageToken );
+    }
   });
 }
 
