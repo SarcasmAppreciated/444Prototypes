@@ -52,8 +52,11 @@
                     <div id="search_area">
                         <div class="fa fa-search" style="color: #FFF; margin-right: 5px;"></div><input id="search_bar"></input>
                         <div id="results">
-                            <div class="result_track" value="QtLXvh8mv3o">
+                            <div class="result_track" value="QtLXvh8mv3o" artist="ODESZA" track="SAY MY NAME (LUKE CHRISTOPHER REMIX)">
                                 <p>ODESZA - SAY MY NAME (LUKE CHRISTOPHER REMIX)</p>
+                            </div>
+                            <div class="result_track" value="YykjpeuMNEk" artist="COLDPLAY" track="HYMM FOR THE WEEKEND">
+                                <p>COLDPLAY - HYMM FOR THE WEEKEND</p>
                             </div>
                         </div>
                         <div class="fa fa-close fa-4x" id="cancel"></div>
@@ -75,7 +78,7 @@
                     <div id="play" class="fa fa-play fa-2x"></div>
                     <div id="skip" class="fa fa-fast-forward fa-2x"></div>
                     
-                    <h2 style="margin-top: 10px;"><i>Now Playing</i> : ODESZA - SAY MY NAME</h2>
+                    <!--<h2 style="margin-top: 10px;"><i>Now Playing</i> : ODESZA - SAY MY NAME</h2>-->
                 </div>
             </div>            
         </div>
@@ -130,10 +133,22 @@
                     $("#search_area").fadeIn("slow");
                     $("#collab_field").fadeOut("slow");
                 })
-
+                
+                
+                var count = 1;
+                
                 $(".result_track").click(function(){
                     addVideoToPlaylist($(this).attr("value"));
-                    $("#playlist").append("<div class='playlist_track'><div class='track_num'>9</div><div class='track_pic'></div><div class='track_artist_song'><h3 style='margin-top: 10px;'>ODESZA</h3><h2>WHITE LIES (FEAT. JENNI POTTS)</h2></div><div class='track_rating'>0</div></div>");
+                    
+                    var artist = $(this).attr("artist");
+                    var track = $(this).attr("track");
+                    
+                    if(count == 1)
+                        $("#playlist").append("<div class='playlist_track'><div class='track_num'>></div></div><div class='track_artist_song'><h3 style='margin-top: 10px;'>" + artist +"</h3><h2>" + track + "</h2></div><div class='track_rating'>0</div></div>");
+                    else
+                        $("#playlist").append("<div class='playlist_track'><div class='track_num'>"+ count +"</div></div><div class='track_artist_song'><h3 style='margin-top: 10px;'>" + artist +"</h3><h2>" + track + "</h2></div><div class='track_rating'>0</div></div>");
+
+                    count++;
                     hideSearch();
                 });
               
