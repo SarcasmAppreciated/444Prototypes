@@ -38,6 +38,10 @@ function createPlaylist() {
   });
 }
 
+function getPlaylistID (){
+    return playlistId;
+}
+
 // Add a video ID specified in the form to the playlist.
 function addVideoToPlaylist(val) {
   addToPlaylist(val);
