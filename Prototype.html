@@ -234,7 +234,7 @@
                         removeFromPlaylist($("#delete_item").text());
                         
                         if($id.parent().find(".track_num").text() == ">")
-                            $id.parent().next(".track_num").find().text(">");
+                            $id.parent().next().find(".track_num").text(">");
                         
                         $id.parent().remove();
                     }, 1000);
