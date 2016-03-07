@@ -39,8 +39,8 @@ function createPlaylist() {
 }
 
 // Add a video ID specified in the form to the playlist.
-function addVideoToPlaylist() {
-  addToPlaylist($(this).val());
+function addVideoToPlaylist(val) {
+  addToPlaylist(val);
 }
 
 // Add a video to a playlist. The "startPos" and "endPos" values let you
