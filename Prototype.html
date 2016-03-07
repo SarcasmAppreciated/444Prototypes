@@ -94,12 +94,15 @@
                 player = new YT.Player('player', {
                     height: '390',
                     width: '640',
-                    videoId: 'M7lc1UVf-VE',
+                    playerVars: 
+                    {
+                        listType:'playlist',
+                        list: getPlaylistID()
+                    },
                     events: {
                         'onReady': onPlayerReady
                     }
                 });
-                player.loadPlaylist("PL5qjstFaIeLw757wQWpvE_aURI1zEdSta", 0, 0, "default");
             }
 
             function onPlayerReady(event) {
