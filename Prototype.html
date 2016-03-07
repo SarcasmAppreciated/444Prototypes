@@ -126,13 +126,18 @@
                     player.nextVideo();                    
                     nowPlaying();
                 });
-            }            
+            }
 
             function onPlayerStateChange(event) {
                 if (event.data == YT.PlayerState.ENDED) {
                     nowPlaying();
                 }
-            }            
+            }
+            
+            function nowPlaying() {
+                $(".playlist_track").first().remove();
+                $(".track_num").delay(500).first().text(">");
+            }
             
             $( document).ready(function (){            
                 $("#playlist-button").click(function(){
@@ -187,13 +192,7 @@
                 $(".fa-check-square").click(function(){
                     $("#collab_field").fadeOut("slow");
                 });
-                
-                function nowPlaying() {
-                    alert();
-                    $("#playlist").find(".playlist_track").first().remove();
-                    $(".track_num").delay(500).first().text(">");
-                }
-                
+                                
                 function hideSearch() {
                     $("#search_area").fadeOut("slow");
                     $("#search").css({"background-color" : "#e6e6e6", "color" : "#000"});
