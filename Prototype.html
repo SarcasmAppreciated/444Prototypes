@@ -131,16 +131,12 @@
                     $("#collab_field").fadeOut("slow");
                 })
 
-                $("#odesza").click(function(){
+                $(".result_track").click(function(){
+                    addToPlayList();
                     $("#playlist").append("<div class='playlist_track'><div class='track_num'>9</div><div class='track_pic'></div><div class='track_artist_song'><h3 style='margin-top: 10px;'>ODESZA</h3><h2>WHITE LIES (FEAT. JENNI POTTS)</h2></div><div class='track_rating'>0</div></div>");
                     hideSearch();
                 });
-                
-                $("#houdini").click(function(){
-                    $("#playlist").append("<div class='playlist_track'><div class='track_num'>10</div><div class='track_pic'></div><div class='track_artist_song'><h3 style='margin-top: 10px;'>FOSTER THE PEOPLE</h3><h2>HOUDINI</h2></div><div class='track_rating'>0</div></div>");
-                    hideSearch();
-                });              
-          
+              
                 $("#cancel").click(function(){
                     hideSearch();
                 });
