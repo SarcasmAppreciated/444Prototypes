@@ -123,13 +123,7 @@
                 });
                 
                 $("#skip").click(function(){
-                    // player.loadPlaylist({"PL5qjstFaIeLw757wQWpvE_aURI1zEdSta", 0, 0, "default"});
-                    
-                    player.loadPlaylist({list:"PL5qjstFaIeLw757wQWpvE_aURI1zEdSta",
-                     listType:"playlist",
-                     index:0,
-                     startSeconds:0,
-                     suggestedQuality:"default"});
+                    player.nextVideo();
                 });
             }
             
@@ -151,12 +145,17 @@
                 
                 $(".result_track").click(function(){
                     var trackID = $(this).attr("value")
-                    // addVideoToPlaylist(trackID);
-                    
+                    addVideoToPlaylist(trackID);
+                   
                     var artist = $(this).attr("artist");
                     var track = $(this).attr("track");
                     
                     if(count == 1) {
+                        player.loadPlaylist({list: getPlaylistID(),
+                        listType:"playlist",
+                        index:0,
+                        startSeconds:0,
+                        suggestedQuality:"default"});
                         $("#playlist").append("<div class='playlist_track'><div class='track_num'>></div><div class='track_artist_song'><h3 style='margin-top: 10px;'>" + artist +"</h3><h2>" + track + "</h2></div><div class='track_rating'>0</div></div>");
                     } else
                         $("#playlist").append("<div class='playlist_track'><div class='track_num'>"+ count +"</div><div class='track_artist_song'><h3 style='margin-top: 10px;'>" + artist +"</h3><h2>" + track + "</h2></div><div class='track_rating'>0</div></div>");
