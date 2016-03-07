@@ -91,7 +91,7 @@ function requestVideoPlaylist(playlistId, index, pageToken) {
   var request = gapi.client.youtube.playlistItems.list(requestOptions);
   request.execute(function(response) {
     var playlistItems = response.items;
-    $("#delete_item").attr("value", playlistItems[index].id);
+    $("#delete_item").text(playlistItems[index].id);
   });
   
 }
