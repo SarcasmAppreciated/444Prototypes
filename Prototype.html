@@ -123,9 +123,8 @@
                 });
                 
                 $("#skip").click(function(){
-                    player.nextVideo();
-                    
-                    $(".result_track").remove();
+                    player.nextVideo();                    
+                    $(".playlist_track").first().remove();
                 });
             }
             
