@@ -95,9 +95,14 @@
             $( document).ready(function (){
                 var isPlaying = false;                                            
                 
-                function instantiatePlaylist(trackID) {
-                    // $("#testYT").attr("data-setup", "{ 'techOrder': ['youtube'], 'sources': [{ 'type': 'video/youtube', 'src': 'https://www.youtube.com/watch?v=" + trackID + "&list=" + getPlaylistID() + "'}]}");
-                
+                function modifyPlaylist(trackID) {
+                    $("#testYT").attr("data-setup", "{ 'techOrder': ['youtube'], 'sources': [{ 'type': 'video/youtube', 'src': 'https://www.youtube.com/watch?v=" + trackID + "&list=" + getPlaylistID() + "'}]}").load(function(){
+                        instantiatePlaylist();
+                    });
+                }
+
+                function instantiatePlaylist() {
+                    alert();
                     var ytPlayer = videojs('testYT', {}, function() {
                 
                         this.on('ended', function() {
@@ -119,8 +124,8 @@
                     
                     $("#skip").click(function(){
                         ytPlayer.play().currentTime(ytPlayer.duration());
-                    });
-                }            
+                    });                
+                }
                                   
             
                 $("#playlist-button").click(function(){
@@ -146,7 +151,7 @@
                     var track = $(this).attr("track");
                     
                     if(count == 1) {
-                        instantiatePlaylist(trackID);
+                        modifyPlaylist(trackID);
                         $("#playlist").append("<div class='playlist_track'><div class='track_num'>></div><div class='track_artist_song'><h3 style='margin-top: 10px;'>" + artist +"</h3><h2>" + track + "</h2></div><div class='track_rating'>0</div></div>");
                     } else
                         $("#playlist").append("<div class='playlist_track'><div class='track_num'>"+ count +"</div><div class='track_artist_song'><h3 style='margin-top: 10px;'>" + artist +"</h3><h2>" + track + "</h2></div><div class='track_rating'>0</div></div>");
