@@ -123,7 +123,13 @@
                 });
                 
                 $("#skip").click(function(){
-                    player.loadPlaylist("PL5qjstFaIeLw757wQWpvE_aURI1zEdSta", 0, 0, "default");
+                    // player.loadPlaylist({"PL5qjstFaIeLw757wQWpvE_aURI1zEdSta", 0, 0, "default"});
+                    
+                    player.loadPlaylist({list:"playlist",
+                     listType:"PL5qjstFaIeLw757wQWpvE_aURI1zEdSta",
+                     index:0,
+                     startSeconds:0,
+                     suggestedQuality:"default"});
                 });
             }
             
