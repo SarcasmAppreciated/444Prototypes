@@ -33,7 +33,7 @@ h3 {
 }
 
 #screen {
-    width: 402px;
+    width: 400px;
     height: 702px;
     display: inline-block;
     margin-top: 153px;
@@ -111,7 +111,7 @@ button.start_screen_button p {
 }
 
 #collab_field  {
-    width: 402px;
+    width: 400px;
     height: 70px;
     display: none;
     position: absolute;
@@ -197,7 +197,7 @@ button.start_screen_button p {
     width: 400px;
     height: 60px;
     display: block;
-    border-top: 1px solid #999;
+    border-bottom: 1px solid #999;
     font-family: 'Oswald', Arial, sans-serif;
     text-align: left;
     margin-top: 1px;
