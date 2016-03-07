@@ -244,14 +244,14 @@
                     }, 1000);
                     
                     setTimeout(function(){
-                        removeFromPlaylist($("#delete_item").val());                        
+                        removeFromPlaylist($("#delete_item").val());
+
+                        $(".track_rating").each(function(index, item){
+                            $(this).attr("value", index);
+                        });                        
                     }, 2000);
                     
                     count--;
-                    
-                    $(".track_rating").each(function(index, item){
-                        $(this).attr("value", index);
-                    });
                 }
                                 
                 function hideSearch() {
