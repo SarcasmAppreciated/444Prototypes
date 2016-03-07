@@ -187,10 +187,7 @@
                     });
                 });                
                 
-                function rateTrack($id) {
-                    var index = $id.attr("value");
-                    requestVideoPlaylist(getPlaylistID(), index);
-
+                function rateTrack($id) {                    
                     if($id.css("color") == "rgb(0, 0, 0)") {
                         $id.css("color", "#00a651");
                         var curr = parseInt($id.text()) + 1;
@@ -199,8 +196,13 @@
                         $id.css("color", "#ff0000");
                         var curr = parseInt($id.text()) - 2;
                         $id.text(curr);
-                        removeFromPlaylist($("#delete_item").text());
-                        $id.parent().remove();
+                        
+                        requestVideoPlaylist(getPlaylistID(), $id.attr("value"));
+                        setTimeout(function(){
+                            removeFromPlaylist($("#delete_item").text());
+                            $id.parent().remove();
+                        }, 1000);                        
+                        
                     } else if($id.css("color") == "rgb(255, 0, 0)") {
                         $id.css("color", "#000000");
                         var curr = parseInt($id.text()) + 1;
