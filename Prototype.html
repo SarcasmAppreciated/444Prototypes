@@ -157,14 +157,11 @@
                         listType:"playlist",
                         index:player.getPlaylistIndex(),
                         startSeconds: player.getCurrentTime(),
-                        suggestedQuality:"default"});
+                        suggestedQuality:"default"});                        
+                    }, 1000);
 
-                        if ((player.getPlayerState() == -1))
-                            player.stopVideo();
-                        else if(player.getPlayerState() == 2)
-                            player.pauseVideo();
-                        
-                    }, 1000);                    
+                    isPlaying = true;
+                    $(".fa-play").addClass("fa-pause");
                     
                     if(count == 1) {                        
                         $("#playlist").append("<div class='playlist_track'><div class='track_num'>></div><div class='track_artist_song'><h3 style='margin-top: 10px;'>" + artist +"</h3><h2>" + track + "</h2></div><div class='track_rating'>0</div></div>");
