@@ -152,14 +152,18 @@
                     var artist = $(this).attr("artist");
                     var track = $(this).attr("track");                    
                     
-                    console.log(player.getPlaylistIndex());
-                    console.log(player.getCurrentTime());
                     setTimeout(function(){
                         player.loadPlaylist({list: getPlaylistID(),
                         listType:"playlist",
                         index:player.getPlaylistIndex(),
                         startSeconds: player.getCurrentTime(),
-                        suggestedQuality:"default"});                   
+                        suggestedQuality:"default"});
+
+                        if ((player.getPlayerState() == -1))
+                            player.stopVideo();
+                        else if(player.getPlayerState() == 2)
+                            player.pauseVideo();
+                        
                     }, 1000);                    
                     
                     if(count == 1) {                        
