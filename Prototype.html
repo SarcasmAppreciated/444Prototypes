@@ -189,7 +189,15 @@
                     });
                     
                     reValue();
-                });                
+                });
+
+				$("body").keydown(function(e) {
+					if(e.keyCode == 39) { // right
+						$("#skip").fadeOut("slow");
+					} else if(e.keyCode == 37) { // left
+						$("#skip").fadeIn("slow");
+					}
+				});
 
                 $("#cancel").click(function(){
                     hideSearch();
