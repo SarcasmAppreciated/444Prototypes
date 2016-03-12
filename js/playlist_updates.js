@@ -92,6 +92,7 @@ function requestVideoPlaylist(playlistId, pageToken) {
         var request = gapi.client.youtube.playlistItems.list(requestOptions);
         request.execute(function(response) {
             var playlistItems = response.items;
+            setPlaylistObject(playlistItems);
         }); 
     }
 }
