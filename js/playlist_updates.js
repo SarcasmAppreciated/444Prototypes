@@ -92,20 +92,18 @@ function requestVideoPlaylist(playlistId, pageToken) {
         var request = gapi.client.youtube.playlistItems.list(requestOptions);
         request.execute(function(response) {
             var playlistItems = response.items;
-            setPlaylistObject(playlistItems);
+            addPlaylistObject(playlistItems);
         }); 
     }
 }
 
-function setPlaylistObject(playlistItems) {
-    temp = currentPlaylist;
-    currentPlaylist = [];
-    $.each(playlistItems, function(index){
-        if(temp[index] != undefined)
-            currentPlaylist.push({ind: index, id: playlistItems[index].id, title: playlistItems[index].snippet.title, rating: temp[index].rating});
-        else
-            currentPlaylist.push({ind: index, id: playlistItems[index].id, title: playlistItems[index].snippet.title, rating: 0});
-    });
+function addPlaylistObject(playlistItems) {
+    var index = playlistItems.length - 1;        
+    currentPlaylist.push({id: playlistItems[index].id, title: playlistItems[index].snippet.title});
+}
+
+function removePlaylistObject($id) {
+    $id.parent().remove();   
 }
 
 function getPlaylistObject(){
@@ -116,69 +114,12 @@ function createTrack(){
     $("#playlist").empty();
     for(var i = 0; i < currentPlaylist.length; i++) {
         if(i == 0)
-            $("#playlist").append("<div class='playlist_track'><div class='track_num'>></div><div class='track_artist_song'><h3 style='margin-top: 10px;'>" + currentPlaylist[i].title.substring(0, currentPlaylist[i].title.indexOf(" - ")) +"</h3><h2>" + currentPlaylist[i].title.substring(currentPlaylist[i].title.indexOf(" - ") + 3, currentPlaylist[i].title.length) + "</h2></div><div index=" + currentPlaylist[i].ind + " value= '" + currentPlaylist[i].id +"' state='0' class='track_rating'>" + currentPlaylist[i].rating + "</div></div>");
+            $("#playlist").append("<div class='playlist_track'><div class='track_num'>></div><div class='track_artist_song'><h3 style='margin-top: 10px;'>" + currentPlaylist[i].title.substring(0, currentPlaylist[i].title.indexOf(" - ")) +"</h3><h2>" + currentPlaylist[i].title.substring(currentPlaylist[i].title.indexOf(" - ") + 3, currentPlaylist[i].title.length) + "</h2></div><div index=" + i + " value= '" + currentPlaylist[i].id +"' state='0' class='track_rating'>0</div></div>");
         else
-            $("#playlist").append("<div class='playlist_track'><div class='track_num'>" + currentPlaylist[i].ind +"</div><div class='track_artist_song'><h3 style='margin-top: 10px;'>" + currentPlaylist[i].title.substring(0, currentPlaylist[i].title.indexOf(" - ")) +"</h3><h2>" + currentPlaylist[i].title.substring(currentPlaylist[i].title.indexOf(" - ") + 3, currentPlaylist[i].title.length) + "</h2></div><div index=" + currentPlaylist[i].ind + " value= '" + currentPlaylist[i].id +"' state='0' class='track_rating'>" + currentPlaylist[i].rating + "</div></div>");
+            $("#playlist").append("<div class='playlist_track'><div class='track_num'>" + i +"</div><div class='track_artist_song'><h3 style='margin-top: 10px;'>" + currentPlaylist[i].title.substring(0, currentPlaylist[i].title.indexOf(" - ")) +"</h3><h2>" + currentPlaylist[i].title.substring(currentPlaylist[i].title.indexOf(" - ") + 3, currentPlaylist[i].title.length) + "</h2></div><div index=" + i + " value= '" + currentPlaylist[i].id +"' state='0' class='track_rating'>0</div></div>");
     }
     
     rebindRating();
-}
-
-function rebindRating() {
-    $(".track_rating").unbind('click').click(function(){
-        var rating = rateTrack($(this));
-        currentPlaylist[$(this).attr("index")].rating = parseInt(rating);
-        console.log(currentPlaylist);
-        $(this).text(rating);        
-        checkRating (rating, $(this));
-    });    
-}
-
-function rateTrack($id) {
-    var curr = "";                                        
-    if($id.attr("state") == 0) {
-        $id.css("color", "#00a651");
-        curr = parseInt($id.text()) + 1;
-        $id.attr("state", 1);
-        return curr;
-    } else if($id.attr("state") == 1) {
-        $id.css("color", "#ff0000");
-        curr = parseInt($id.text());
-        $id.attr("state", 2);
-        return -1 * curr;                            
-    } else if($id.attr("state") == 2) {
-        $id.css("color", "#00a651");
-        curr = -1 * (parseInt($id.text())) + 1;
-        $id.attr("state", 1);
-        return curr;
-    }
-}
-
-function checkRating (num, $id){
-    var rating = parseInt(num);
-    if (rating < -2)
-        removeVideo($id);
-}                
-
-function removeVideo($id) {
-    var tid = $id.attr("value");
-    console.log(tid);
-    removeFromPlaylist(tid);
-    currentPlaylist.splice($id.attr("index"), 1);    
-    reValue();
-}
-
-function reValue() {
-    $(".track_num").each(function(index){
-        if(index == 0)
-            $(this).text(">");
-        else
-            $(this).text(index);
-    });
-    
-    $(".track_rating").each(function(index){
-        $(this).attr("index", index);
-    });
 }
 
 function removeFromPlaylist(pid) {  
