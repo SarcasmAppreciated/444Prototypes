@@ -163,7 +163,9 @@
                         listType:"playlist",
                         index:player.getPlaylistIndex(),
                         startSeconds: player.getCurrentTime(),
-                        suggestedQuality:"default"});                        
+                        suggestedQuality:"default"});
+                        
+                        createTrack();
                     }, 1000);
 
                     isPlaying = true;
