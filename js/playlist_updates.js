@@ -78,21 +78,24 @@ function addToPlaylist(id, startPos, endPos) {
 }
 
 // Retrieve the list of videos in the specified playlist.
-function requestVideoPlaylist(playlistId, pageToken) {
-  var pIID;
-  var requestOptions = {
-    playlistId: playlistId,
-    part: 'snippet',
-    maxResults: 50
-  };
-  if (pageToken) {
-    requestOptions.pageToken = pageToken;
-  }
-  var request = gapi.client.youtube.playlistItems.list(requestOptions);
-  request.execute(function(response) {
-    var playlistItems = response.items;    
-    setPlaylistObject(playlistItems);
-  }); 
+function requestVideoPlaylist(playlistId, pageToken) {  
+    if(playlistId != undefined) {
+    
+        var pIID;
+        var requestOptions = {
+            playlistId: playlistId,
+            part: 'snippet',
+            maxResults: 50
+        };
+        if (pageToken) {
+            requestOptions.pageToken = pageToken;
+        }
+        var request = gapi.client.youtube.playlistItems.list(requestOptions);
+        request.execute(function(response) {
+            var playlistItems = response.items;    
+            setPlaylistObject(playlistItems);
+        }); 
+    }
 }
 
 function setPlaylistObject(playlistItems) {
