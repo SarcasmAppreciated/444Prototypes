@@ -1,5 +1,6 @@
 // Define some variables used to remember state.
 var playlistId, channelId;
+var currentPlaylist = [];
 
 // After the API loads, call a function to enable the playlist creation form.
 function handleAPILoaded() {
@@ -90,9 +91,21 @@ function requestVideoPlaylist(playlistId, index, pageToken) {
   request.execute(function(response) {
     var playlistItems = response.items;
     console.log(playlistItems);
+    
+    setPlaylistObjects(playlistItems);
+    
     $("#delete_item").val(playlistItems[index].id);
-  });
-  
+  }); 
+}
+
+function setPlaylistObject(playlistItems) {
+    $.each(playlistItems, function(index){
+        currentPlaylist.push(playlistItems[index].id);
+    });    
+}
+
+function getPlaylistObject(){
+    return currentPlaylist;
 }
 
 function removeFromPlaylist(pid) {  
