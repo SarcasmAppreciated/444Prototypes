@@ -123,7 +123,7 @@ function createTrack(){
 function rebindRating() {
     $(".track_rating").unbind('click').click(function(){
         var rating = rateTrack($(this));
-        $(this).attr("index", rating);
+        currentPlaylist[$(this).attr("index")].rating = rating;
         $(this).text(rating);        
         checkRating (rating, $(this));
     });    
