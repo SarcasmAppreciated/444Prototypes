@@ -165,7 +165,11 @@
                         
                         createTrack();
                     }, 1000);
-
+                    
+                    setTimeout(function(){
+                        rebindRating();
+                    }, 1500);
+                    
                     isPlaying = true;
                     $(".fa-play").addClass("fa-pause");
                  
