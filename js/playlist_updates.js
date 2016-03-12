@@ -72,15 +72,14 @@ function addToPlaylist(id, startPos, endPos) {
     }
   });
   request.execute(function(response) {
-    $('#status').html('<pre>' + JSON.stringify(response.result) + '</pre>');
-    requestVideoPlaylist(getPlaylistID());
+        requestVideoPlaylist(getPlaylistID());
+        $('#status').html('<pre>' + JSON.stringify(response.result) + '</pre>');
   });
 }
 
 // Retrieve the list of videos in the specified playlist.
 function requestVideoPlaylist(playlistId, pageToken) {  
-    if(playlistId != undefined) {
-    
+    if(playlistId != undefined) {    
         var pIID;
         var requestOptions = {
             playlistId: playlistId,
@@ -101,7 +100,8 @@ function requestVideoPlaylist(playlistId, pageToken) {
 function setPlaylistObject(playlistItems) {
     $.each(playlistItems, function(index){
         currentPlaylist.push({ind: index, id: playlistItems[index].id, title: playlistItems[index].snippet.title});
-    });    
+    });
+    createTrack();
 }
 
 function getPlaylistObject(){
@@ -110,7 +110,7 @@ function getPlaylistObject(){
 
 function createTrack(){
     for(var i = 0; i < currentPlaylist.length; i++) {
-        $("#playlist").append("<div class='playlist_track'><div class='track_num'>" + currentPlaylist[i].ind +"</div><div class='track_artist_song'><h3 style='margin-top: 10px;'>" + currentPlaylist[i].title.substring(0, title.indexOf(" - ")) +"</h3><h2>" + currentPlaylist[i].title.substring(title.indexOf(" - ") + 3, title.length) + "</h2></div><div value= '" + currentPlaylist[i].id +"' state='0' class='track_rating'>0</div></div>");
+        $("#playlist").append("<div class='playlist_track'><div class='track_num'>" + currentPlaylist[i].ind +"</div><div class='track_artist_song'><h3 style='margin-top: 10px;'>" + currentPlaylist[i].title.substring(0, currentPlaylist[i].title.indexOf(" - ")) +"</h3><h2>" + currentPlaylist[i].title.substring(currentPlaylist[i].title.indexOf(" - ") + 3, title.length) + "</h2></div><div value= '" + currentPlaylist[i].id +"' state='0' class='track_rating'>0</div></div>");
     }
 }
 
