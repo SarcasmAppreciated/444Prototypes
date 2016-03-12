@@ -100,7 +100,7 @@ function requestVideoPlaylist(playlistId, pageToken) {
 function addPlaylistObject(playlistItems) {
     var index = playlistItems.length - 1;        
     currentPlaylist.push({id: playlistItems[index].id, title: playlistItems[index].snippet.title, rating: 0});
-    createTrack(i);
+    createTrack(index);
 }
 
 function removePlaylistObject($id) {
