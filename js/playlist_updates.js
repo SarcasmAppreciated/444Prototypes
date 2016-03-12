@@ -92,7 +92,7 @@ function requestVideoPlaylist(playlistId, index, pageToken) {
     var playlistItems = response.items;
     console.log(playlistItems);
     
-    setPlaylistObjects(playlistItems);
+    setPlaylistObject(playlistItems);
     
     $("#delete_item").val(playlistItems[index].id);
   }); 
@@ -100,7 +100,7 @@ function requestVideoPlaylist(playlistId, index, pageToken) {
 
 function setPlaylistObject(playlistItems) {
     $.each(playlistItems, function(index){
-        currentPlaylist.push(playlistItems[index].id);
+        currentPlaylist.push({ind: index, id: playlistItems[index].id, title: playlistItems[index].snippet.title});
     });    
 }
 
