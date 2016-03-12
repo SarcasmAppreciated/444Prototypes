@@ -121,19 +121,26 @@
                 });
                 
                 $("#skip").click(function(){
-                    player.nextVideo();                    
+                    player.nextVideo();
+                    removeFirstTrack();
                     nowPlaying();
                 });
             }
 
             function onPlayerStateChange(event) {
                 if (event.data == YT.PlayerState.ENDED) {
+                    removeFirstTrack();
                     nowPlaying();
                 }
             }
             
-            function nowPlaying() {                
-                // TODO
+            function removeFirstTrack() {
+                $(".playlist_track").first().remove();
+            }
+            
+            function nowPlaying() {
+                var arr = getPlaylistObject();
+                $("#now_playing").text(arr[0].title);
             }
             
             $( document).ready(function (){                
