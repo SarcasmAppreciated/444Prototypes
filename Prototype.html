@@ -129,9 +129,9 @@
 
             function onPlayerStateChange(event) {
                 if (event.data == YT.PlayerState.ENDED) {
-                    removeFirstTrack();
-                    nowPlaying();
+                    removeFirstTrack();                    
                 }
+                nowPlaying();
             }
             
             function removeFirstTrack() {
