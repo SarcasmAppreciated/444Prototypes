@@ -100,7 +100,7 @@ function requestVideoPlaylist(playlistId, pageToken) {
 function setPlaylistObject(playlistItems) {
     currentPlaylist = [];
     $.each(playlistItems, function(index){
-        currentPlaylist.push({ind: index, id: playlistItems[index].id, title: playlistItems[index].snippet.title});
+        currentPlaylist.push({ind: index, id: playlistItems[index].id, title: playlistItems[index].snippet.title, rating: 0});
     });
 }
 
@@ -109,19 +109,24 @@ function getPlaylistObject(){
 }
 
 function createTrack(){
-    console.log(currentPlaylist);
     $("#playlist").empty();
     for(var i = 0; i < currentPlaylist.length; i++) {
         if(i == 0)
-            $("#playlist").append("<div class='playlist_track'><div class='track_num'>></div><div class='track_artist_song'><h3 style='margin-top: 10px;'>" + currentPlaylist[i].title.substring(0, currentPlaylist[i].title.indexOf(" - ")) +"</h3><h2>" + currentPlaylist[i].title.substring(currentPlaylist[i].title.indexOf(" - ") + 3, currentPlaylist[i].title.length) + "</h2></div><div value= '" + currentPlaylist[i].id +"' state='0' class='track_rating'>0</div></div>");
+            $("#playlist").append("<div class='playlist_track'><div class='track_num'>></div><div class='track_artist_song'><h3 style='margin-top: 10px;'>" + currentPlaylist[i].title.substring(0, currentPlaylist[i].title.indexOf(" - ")) +"</h3><h2>" + currentPlaylist[i].title.substring(currentPlaylist[i].title.indexOf(" - ") + 3, currentPlaylist[i].title.length) + "</h2></div><div index=" + currentPlaylist[i].ind + " value= '" + currentPlaylist[i].id +"' state='0' class='track_rating'>" + currentPlaylist[i].rating + "</div></div>");
         else
-            $("#playlist").append("<div class='playlist_track'><div class='track_num'>" + currentPlaylist[i].ind +"</div><div class='track_artist_song'><h3 style='margin-top: 10px;'>" + currentPlaylist[i].title.substring(0, currentPlaylist[i].title.indexOf(" - ")) +"</h3><h2>" + currentPlaylist[i].title.substring(currentPlaylist[i].title.indexOf(" - ") + 3, currentPlaylist[i].title.length) + "</h2></div><div value= '" + currentPlaylist[i].id +"' state='0' class='track_rating'>0</div></div>");
+            $("#playlist").append("<div class='playlist_track'><div class='track_num'>" + currentPlaylist[i].ind +"</div><div class='track_artist_song'><h3 style='margin-top: 10px;'>" + currentPlaylist[i].title.substring(0, currentPlaylist[i].title.indexOf(" - ")) +"</h3><h2>" + currentPlaylist[i].title.substring(currentPlaylist[i].title.indexOf(" - ") + 3, currentPlaylist[i].title.length) + "</h2></div><div index=" + currentPlaylist[i].ind + " value= '" + currentPlaylist[i].id +"' state='0' class='track_rating'>" + currentPlaylist[i].rating + "</div></div>");
     }
     
+    rebindRating();
+}
+
+function rebindRating() {
     $(".track_rating").unbind('click').click(function(){
-        $(this).text(rateTrack($(this)));        
-        checkRating ($(this).text(), $(this));
-    });
+        var rating = rateTrack($(this));
+        $(this).attr("index", rating);
+        $(this).text(rating);        
+        checkRating (rating, $(this));
+    });    
 }
 
 function rateTrack($id) {
@@ -154,8 +159,7 @@ function removeVideo($id) {
     var tid = $id.attr("value");
     console.log(tid);
     removeFromPlaylist(tid);
-    var arr = getPlaylistObject();
-    console.log(arr.indexOf(tid));
+    currentPlaylist.splice($id.attr("index"), 1);    
     reValue();
 }
 
@@ -165,6 +169,10 @@ function reValue() {
             $(this).text(">");
         else
             $(this).text(index);
+    });
+    
+    $(".track_rating").each(function(index){
+        $(this).attr("index", index);
     });
 }
 
