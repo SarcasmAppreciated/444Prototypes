@@ -232,7 +232,7 @@ button.start_screen_button p {
     text-overflow: ellipsis;    
     white-space: nowrap;
     overflow: hidden;
-    text-decoration: uppercase;
+    text-transform: uppercase;
 }
 
 .track_rating {

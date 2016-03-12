@@ -179,7 +179,7 @@
                         checkRating ($(this).text(), $(this));
                     });
                     
-                    // reValue();
+                    reValue();
                 });
 
 				$("body").keydown(function(e) {
@@ -233,7 +233,8 @@
                     console.log(tid);
                     removeFromPlaylist(tid);
                     var arr = getPlaylistObject();
-                    console.log(arr.indexOf(tid));                    
+                    console.log(arr.indexOf(tid));
+                    reValue();
                 }
                 
                 function reValue() {
@@ -242,10 +243,7 @@
                             $(this).text(">");
                         else
                             $(this).text(index);
-                    });  
-                    $(".track_rating").each(function(index){
-                        $(this).attr("value", index);
-                    });  
+                    });
                 }
                                 
                 function hideSearch() {

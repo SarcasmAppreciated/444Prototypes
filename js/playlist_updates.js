@@ -98,6 +98,7 @@ function requestVideoPlaylist(playlistId, pageToken) {
 }
 
 function setPlaylistObject(playlistItems) {
+    currentPlaylist = [];
     $.each(playlistItems, function(index){
         currentPlaylist.push({ind: index, id: playlistItems[index].id, title: playlistItems[index].snippet.title});
     });
