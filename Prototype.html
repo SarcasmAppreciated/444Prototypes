@@ -174,6 +174,7 @@
                     hideSearch();
                     
                     $(".track_rating").unbind('click').click(function(){
+                        alert();
                         $(this).text(rateTrack($(this)));
                         
                         checkRating ($(this).text(), $(this));
