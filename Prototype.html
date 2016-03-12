@@ -138,9 +138,7 @@
                 $("#now_playing").delay(1000).text($(".track_artist_song").first().find("h3").text() + " - " + $(".track_artist_song").first().find("h2").text());
             }
             
-            $( document).ready(function (){
-                requestVideoPlaylist(getPlaylistID());
-                
+            $( document).ready(function (){                
                 $("#playlist-button").click(function(){
                     $("#start_screen").fadeOut("slow", function(){
                         $(".full_screen").delay(500).fadeOut("slow");

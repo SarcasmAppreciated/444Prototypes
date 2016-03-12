@@ -108,8 +108,9 @@ function getPlaylistObject(){
     return currentPlaylist;
 }
 
-function createTrack(){    
-    for(int i = 0; i < currentPlaylist.length; i++) {
+function createTrack(){
+    var len = currentPlaylist.length;
+    for(int i = 0; i < len; i++) {
         $("#playlist").append("<div class='playlist_track'><div class='track_num'>" + currentPlaylist[i].ind +"</div><div class='track_artist_song'><h3 style='margin-top: 10px;'>" + currentPlaylist[i].title.substring(0, title.indexOf(" - ")) +"</h3><h2>" + currentPlaylist[i].title.substring(title.indexOf(" - ") + 3, title.length) + "</h2></div><div value= '" + currentPlaylist[i].id +"' state='0' class='track_rating'>0</div></div>");
     }
 }
