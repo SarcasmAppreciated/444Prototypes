@@ -117,6 +117,55 @@ function createTrack(){
         else
             $("#playlist").append("<div class='playlist_track'><div class='track_num'>" + currentPlaylist[i].ind +"</div><div class='track_artist_song'><h3 style='margin-top: 10px;'>" + currentPlaylist[i].title.substring(0, currentPlaylist[i].title.indexOf(" - ")) +"</h3><h2>" + currentPlaylist[i].title.substring(currentPlaylist[i].title.indexOf(" - ") + 3, currentPlaylist[i].title.length) + "</h2></div><div value= '" + currentPlaylist[i].id +"' state='0' class='track_rating'>0</div></div>");
     }
+    
+    $(".track_rating").unbind('click').click(function(){
+        $(this).text(rateTrack($(this)));        
+        checkRating ($(this).text(), $(this));
+    });
+}
+
+function rateTrack($id) {
+    var curr = "";                                        
+    if($id.attr("state") == 0) {
+        $id.css("color", "#00a651");
+        curr = parseInt($id.text()) + 1;
+        $id.attr("state", 1);
+        return curr;
+    } else if($id.attr("state") == 1) {
+        $id.css("color", "#ff0000");
+        curr = parseInt($id.text());
+        $id.attr("state", 2);
+        return -1 * curr;                            
+    } else if($id.attr("state") == 2) {
+        $id.css("color", "#00a651");
+        curr = -1 * (parseInt($id.text())) + 1;
+        $id.attr("state", 1);
+        return curr;
+    }
+}
+
+function checkRating (num, $id){
+    var rating = parseInt(num);
+    if (rating < -2)
+        removeVideo($id);
+}                
+
+function removeVideo($id) {
+    var tid = $id.attr("value");
+    console.log(tid);
+    removeFromPlaylist(tid);
+    var arr = getPlaylistObject();
+    console.log(arr.indexOf(tid));
+    reValue();
+}
+
+function reValue() {
+    $(".track_num").each(function(index){
+        if(index == 0)
+            $(this).text(">");
+        else
+            $(this).text(index);
+    });
 }
 
 function removeFromPlaylist(pid) {  
