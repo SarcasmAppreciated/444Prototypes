@@ -138,6 +138,7 @@ button.start_screen_button p {
     height: auto;
     display: inline-block;
     overflow-y: scroll;
+	overflow-x: hidden;
 }
 
 #playlist {
@@ -265,7 +266,22 @@ button.start_screen_button p {
 }
 
 @media (max-width: 800px) {
-	
+	body {
+		overflow: hidden;
+	}
+	#phone {
+		width: 100%;
+		height: 100%;
+		margin-top: 0;
+		background: none;
+	}
+	#screen {
+		width: 100%;
+		height: 100%;
+		margin-top: 0;
+		display: block;
+		box-shadow: none;
+	}
 }
 
 
