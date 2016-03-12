@@ -124,6 +124,7 @@
                     player.nextVideo();
                     removeFirstTrack();
                     nowPlaying();
+                    reValue();
                 });
             }
 
@@ -244,19 +245,6 @@
                     currentPlaylist.splice($id.attr("index"), 1);
                     removePlaylistObject($id);
                     reValue();
-                }
-
-                function reValue() {
-                    $(".track_num").each(function(index){
-                        if(index == 0)
-                            $(this).text(">");
-                        else
-                            $(this).text(index);
-                    });
-                    
-                    $(".track_rating").each(function(index){
-                        $(this).attr("index", index);
-                    });
                 }
                                                                 
                 function hideSearch() {

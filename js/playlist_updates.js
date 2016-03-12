@@ -118,6 +118,19 @@ function createTrack(i){
         $("#playlist").append("<div class='playlist_track'><div class='track_num'>" + i +"</div><div class='track_artist_song'><h3 style='margin-top: 10px;'>" + currentPlaylist[i].title.substring(0, currentPlaylist[i].title.indexOf(" - ")) +"</h3><h2>" + currentPlaylist[i].title.substring(currentPlaylist[i].title.indexOf(" - ") + 3, currentPlaylist[i].title.length) + "</h2></div><div index=" + i + " value= '" + currentPlaylist[i].id +"' state='0' class='track_rating'>" + currentPlaylist[i].rating + "</div></div>");
 }
 
+function reValue() {
+    $(".track_num").each(function(index){
+        if(index == 0)
+            $(this).text(">");
+        else
+            $(this).text(index);
+    });
+    
+    $(".track_rating").each(function(index){
+        $(this).attr("index", index);
+    });
+}
+
 function removeFromPlaylist(pid) {  
   var request = gapi.client.youtube.playlistItems.delete({
     id: pid
