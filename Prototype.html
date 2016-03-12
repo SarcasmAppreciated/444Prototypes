@@ -124,7 +124,7 @@
                     player.nextVideo();
                     removeFirstTrack();
                     nowPlaying();
-                    reValue();
+                    reValueOrder();
                 });
             }
 
@@ -174,13 +174,13 @@
                     
                     setTimeout(function(){
                         rebindRating();
+                        reValueOrder();
                     }, 1500);
                     
                     isPlaying = true;
                     $(".fa-play").addClass("fa-pause");
                  
-                    hideSearch();
-                    reValue();
+                    hideSearch();                    
                 });
 
 				$("body").keydown(function(e) {
@@ -244,7 +244,7 @@
                     removeFromPlaylist(tid);
                     currentPlaylist.splice($id.attr("index"), 1);
                     removePlaylistObject($id);
-                    reValue();
+                    reValueIndex();
                 }
                                                                 
                 function hideSearch() {
