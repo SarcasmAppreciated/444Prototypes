@@ -28,7 +28,9 @@
                     <div>
                         <div id="logo"></div>
                         <button class="start_screen_button" id="login-link"><p>Login</p></button>
-                        <button class="start_screen_button" id="playlist-button" disabled onclick="createPlaylist()"><p>Create Playlist</p></button>
+                        <button class="start_screen_button disabled_button reveal" id="playlist-button" disabled onclick="createPlaylist()"><p>Create Playlist</p></button>
+                        <input value="" id="join_id"></input><div class="fa fa-check-square fa-2x reveal" id="join_check"></div>
+                        <button class="start_screen_button disabled_button" id="join-button" disabled onclick="joinPlaylist()"><p>Join A Playlist</p></button>
                     </div>
                 </div>
                 <div class="full_screen">
@@ -42,7 +44,7 @@
                 </div>
                 <div id="collab_field">
                     <p>Share this link!</p>
-                    <input value="" id="playlist-id"></input><div class="fa fa-check-square fa-2x"></div>
+                    <input value="" id="playlist-id"></input><div class="fa fa-check-square fa-2x" id="collab_check"></div>
                 </div>
                 <div id="active_area">
                     <div id="search_area">
@@ -145,7 +147,7 @@
             }
             
             $( document).ready(function (){                
-                $("#playlist-button").click(function(){
+                $(".reveal").click(function(){
                     $("#start_screen").fadeOut("slow", function(){
                         $(".full_screen").delay(500).fadeOut("slow");
                     });                    
@@ -199,7 +201,7 @@
                     $("#collab_field").fadeIn("slow");
                 });
                 
-                $(".fa-check-square").click(function(){
+                $("#collab_check").click(function(){
                     $("#collab_field").fadeOut("slow");
                 });
                 

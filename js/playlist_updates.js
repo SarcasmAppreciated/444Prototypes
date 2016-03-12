@@ -1,5 +1,5 @@
 // Define some variables used to remember state.
-var playlistId, channelId;
+var playlistId;
 var currentPlaylist = [];
 
 // After the API loads, call a function to enable the playlist creation form.
@@ -9,7 +9,7 @@ function handleAPILoaded() {
 
 // Enable the form for creating a playlist.
 function enableForm() {
-  $('#playlist-button').attr('disabled', false);
+  $('.disabled_button').attr('disabled', false);  
 }
 
 // Create a private playlist.
@@ -29,14 +29,20 @@ function createPlaylist() {
   request.execute(function(response) {
     var result = response.result;
     if (result) {
-      playlistId = result.id;
-      $('#playlist-id').val("https://www.youtube.com/playlist?list=" + playlistId);
-      $('#playlist-title').html(result.snippet.title);
-      $('#playlist-description').html(result.snippet.description);
+        playlistId = result.id;
+        console.log(playlistId);
+        $('#playlist-id').val("https://www.youtube.com/playlist?list=" + playlistId);      
     } else {
-      $('#status').html('Could not create playlist');
+        alert('Could not create playlist');
     }
   });
+}
+
+function joinPlaylist() {
+    $("#join_id").fadeIn("slow");
+    $("#join_check").click(function() {
+        playlistId = $('#join_id').val();
+    });    
 }
 
 function getPlaylistID (){
@@ -45,7 +51,7 @@ function getPlaylistID (){
 
 // Add a video ID specified in the form to the playlist.
 function addVideoToPlaylist(val) {
-  addToPlaylist(val);
+    addToPlaylist(val);
 }
 
 // Add a video to a playlist. The "startPos" and "endPos" values let you
@@ -119,7 +125,7 @@ function createTrack(i){
 }
 
 function reValueOrder() {
-    $(".track_num").each(function(index){
+    $(".track_num").each(function(index) {
         if(index == 0)
             $(this).text(">");
         else
@@ -129,9 +135,14 @@ function reValueOrder() {
 
 function reValueIndex() {
     reValueOrder();
-    $(".track_rating").each(function(index){
-        $(this).attr("index", index);
-    });    
+    var len = 0;
+    $(".track_rating").each(function() {
+        len++;
+    });
+    
+    for (var i = player.getPlaylistIndex(); i < len; i++) {
+        $(".track_rating").attr("index", i); 
+    }
 }
 
 function removeFromPlaylist(pid) {  
