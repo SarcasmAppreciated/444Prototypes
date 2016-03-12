@@ -231,7 +231,8 @@ button.start_screen_button p {
     margin-left: 10px;
     text-overflow: ellipsis;    
     white-space: nowrap;
-    overflow: hidden;    
+    overflow: hidden;
+    text-decoration: uppercase;
 }
 
 .track_rating {

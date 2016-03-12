@@ -173,13 +173,13 @@
                  
                     hideSearch();
                     
-                    /*$(".track_rating").unbind('click').click(function(){
+                    $(".track_rating").unbind('click').click(function(){
                         $(this).text(rateTrack($(this)));
                         
                         checkRating ($(this).text(), $(this));
                     });
                     
-                    reValue();*/
+                    // reValue();
                 });
 
 				$("body").keydown(function(e) {
@@ -229,23 +229,11 @@
                 }                
                 
                 function removeVideo($id) {
-                    requestVideoPlaylist(getPlaylistID());                    
-                    
-                    setTimeout(function(){
-                        if($id.parent().find(".track_num").text() == ">") {
-                            $id.parent().next().find(".track_num").text(">");
-                            player.nextVideo();
-                            $("#now_playing").delay(2000).text($(".track_artist_song").first().find("h3").text() + " - " + $(".track_artist_song").first().find("h2").text());
-                        }
-                    $id.parent().remove();                       
-                    }, 1000);
-                    
-                    setTimeout(function(){
-                        removeFromPlaylist($("#delete_item").val());
-
-                        reValue();              
-                    }, 2000);
-                    
+                    var tid = $id.attr("value");
+                    console.log(tid);
+                    removeFromPlaylist(tid);
+                    var arr = getPlaylistObject();
+                    console.log(arr.indexOf(tid));                    
                 }
                 
                 function reValue() {
