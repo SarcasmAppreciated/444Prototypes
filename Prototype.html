@@ -136,10 +136,10 @@
             function nowPlaying() {                
                 $(".playlist_track").first().remove();
                 $(".track_num").delay(500).first().text(">");
-                $("#now_playing").delay(500).text($(".track_artist_song").first().find("h3").text() + " - " + $(".track_artist_song").first().find("h2").text());
+                $("#now_playing").delay(1000).text($(".track_artist_song").first().find("h3").text() + " - " + $(".track_artist_song").first().find("h2").text());
             }
             
-            $( document).ready(function (){            
+            $( document).ready(function (){                
                 $("#playlist-button").click(function(){
                     $("#start_screen").fadeOut("slow", function(){
                         $(".full_screen").delay(500).fadeOut("slow");
@@ -196,6 +196,7 @@
                 });
                 
                 $("#collaborate").click(function(){
+                    requestVideoPlaylist(getPlaylistID(), 0);
                     $("#collab_field").fadeIn("slow");
                 });
                 
