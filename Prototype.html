@@ -78,7 +78,6 @@
                 </div>
             </div>            
         </div>
-        <input id="delete_item"></input>
         <div id="player"></div>
         <script>        
             var isPlaying = false;
@@ -139,7 +138,9 @@
                 $("#now_playing").delay(1000).text($(".track_artist_song").first().find("h3").text() + " - " + $(".track_artist_song").first().find("h2").text());
             }
             
-            $( document).ready(function (){                
+            $( document).ready(function (){
+                requestVideoPlaylist(getPlaylistID());
+                
                 $("#playlist-button").click(function(){
                     $("#start_screen").fadeOut("slow", function(){
                         $(".full_screen").delay(500).fadeOut("slow");
@@ -152,7 +153,6 @@
                     $("#collab_field").fadeOut("slow");
                 })
 
-                var isFirst = true;  
                 $(".result_track").click(function(){
                     var trackID = $(this).attr("value")
                     addVideoToPlaylist(trackID);
@@ -170,25 +170,18 @@
 
                     isPlaying = true;
                     $(".fa-play").addClass("fa-pause");
-                   
-                    var reducedCount = 0; 
                     
-                    if(isFirst) {
-                        $("#playlist").append("<div class='playlist_track'><div class='track_num'>></div><div class='track_artist_song'><h3 style='margin-top: 10px;'>" + artist +"</h3><h2>" + track + "</h2></div><div value= '" + reducedCount +"' state='0' class='track_rating'>0</div></div>");
-                        $("#now_playing").delay(500).text($(".track_artist_song").first().find("h3").text() + " - " + $(".track_artist_song").first().find("h2").text());
-                    } else
-                        $("#playlist").append("<div class='playlist_track'><div class='track_num'>0</div><div class='track_artist_song'><h3 style='margin-top: 10px;'>" + artist +"</h3><h2>" + track + "</h2></div><div value= '" + reducedCount +"' state='0' class='track_rating'>0</div></div>");
 
-                    isFirst = false;
+                    createTrack();
                     hideSearch();
                     
-                    $(".track_rating").unbind('click').click(function(){
+                    /*$(".track_rating").unbind('click').click(function(){
                         $(this).text(rateTrack($(this)));
                         
                         checkRating ($(this).text(), $(this));
                     });
                     
-                    reValue();
+                    reValue();*/
                 });
 
 				$("body").keydown(function(e) {
@@ -204,8 +197,6 @@
                 });
                 
                 $("#collaborate").click(function(){
-                    requestVideoPlaylist(getPlaylistID(), 0);
-                    console.log(getPlaylistObject());
                     $("#collab_field").fadeIn("slow");
                 });
                 
@@ -240,7 +231,7 @@
                 }                
                 
                 function removeVideo($id) {
-                    requestVideoPlaylist(getPlaylistID(), $id.attr("value"));                    
+                    requestVideoPlaylist(getPlaylistID());                    
                     
                     setTimeout(function(){
                         if($id.parent().find(".track_num").text() == ">") {
