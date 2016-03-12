@@ -91,16 +91,19 @@ function requestVideoPlaylist(playlistId, pageToken) {
         }
         var request = gapi.client.youtube.playlistItems.list(requestOptions);
         request.execute(function(response) {
-            var playlistItems = response.items;    
-            setPlaylistObject(playlistItems);
+            var playlistItems = response.items;
         }); 
     }
 }
 
 function setPlaylistObject(playlistItems) {
+    temp = currentPlaylist;
     currentPlaylist = [];
     $.each(playlistItems, function(index){
-        currentPlaylist.push({ind: index, id: playlistItems[index].id, title: playlistItems[index].snippet.title, rating: 0});
+        if(temp[index] != undefined)
+            currentPlaylist.push({ind: index, id: playlistItems[index].id, title: playlistItems[index].snippet.title, rating: temp[index].rating});
+        else
+            currentPlaylist.push({ind: index, id: playlistItems[index].id, title: playlistItems[index].snippet.title, rating: 0});
     });
 }
 
