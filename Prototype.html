@@ -140,7 +140,7 @@
             
             function nowPlaying() {
                 var arr = getPlaylistObject();
-                $("#now_playing").text(arr[0].title);
+                $("#now_playing").text(arr[player.getPlaylistIndex()].title);
             }
             
             $( document).ready(function (){                
