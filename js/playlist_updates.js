@@ -232,6 +232,7 @@ function bindResults() {
     
     function rebindRating() {
         $(".arrow_up").unbind('click').click(function(){
+            alert();
             var $parent = $(this).parent(".track_rating");
             var rating = rateTrack($parent);
             $parent.children("p").text(rating);        
