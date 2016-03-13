@@ -234,9 +234,14 @@ function bindResults() {
     
 function rebindRating() {
     $(".arrow_up").unbind('click').click(function(){
-        alert();
         var $parent = $(this).parent(".track_rating");
         var rating = rateTrack($parent, true);
+        $parent.children("p").text(rating);        
+        checkRating (rating, $parent);
+    });
+    $(".arrow_down").unbind('click').click(function(){
+        var $parent = $(this).parent(".track_rating");
+        var rating = rateTrack($parent, false);
         $parent.children("p").text(rating);        
         checkRating (rating, $parent);
     });    
