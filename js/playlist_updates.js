@@ -189,4 +189,17 @@ function removeFromPlaylist(pid) {
   });
 }
 
+function search(query) {
+    var q = query;
+    var request = gapi.client.youtube.search.list({
+        q: q,
+        part: 'snippet'
+    });
+
+    request.execute(function(response) {
+        var str = JSON.stringify(response.result);
+        console.log(str);
+    });
+}
+
 

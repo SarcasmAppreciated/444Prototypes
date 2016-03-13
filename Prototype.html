@@ -160,8 +160,12 @@
                     $(this).css({"background-color" : "#222", "color" : "#FFF"});
                     $("#search_area").fadeIn("slow");
                     $("#collab_field").fadeOut("slow");
-                })
-
+                });
+                
+                $("#search_bar").on("input", function() {
+                    search($(this).val());
+                });
+                
                 $(".result_track").click(function(){
                     var trackID = $(this).attr("value")
                     addVideoToPlaylist(trackID);
