@@ -241,17 +241,17 @@ function bindResults() {
     function rateTrack($id) {
         var curr = "";                                        
         if($id.attr("state") == 0) {
-            $id.css("color", "#00a651");
+            $id.css({"color" : "#00a651", "background" : "url('../images/Arrow.png') center no-repeat"});
             curr = parseInt($id.text()) + 1;
             $id.attr("state", 1);
             return curr;
         } else if($id.attr("state") == 1) {
-            $id.css("color", "#ff0000");
+            $id.css({"color" : "#ff0000", "background" : "url('../images/ArrowDown.png') center no-repeat"});
             curr = parseInt($id.text());
             $id.attr("state", 2);
             return -1 * curr;                            
         } else if($id.attr("state") == 2) {
-            $id.css("color", "#00a651");
+            $id.css({"color" : "#00a651", "background" : "url('../images/Arrow.png') center no-repeat"});
             curr = -1 * (parseInt($id.text())) + 1;
             $id.attr("state", 1);
             return curr;
