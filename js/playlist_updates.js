@@ -39,7 +39,7 @@ function createPlaylist() {
 }
 
 function joinPlaylist() {
-    $("#playlist-button").fadeOut("slow");
+    $(".start_screen_button").fadeOut("slow");
     $(".join_field").fadeIn("slow").css("display", "inline-block");
     $("#join_check").click(function() {
         playlistId = $('#join_id').val();
@@ -110,6 +110,7 @@ function requestVideoPlaylist(playlistId, isAdd, pageToken) {
 }
 
 function recreatePlaylistObject(playlistItems) {
+    currentPlaylist = [];
     $.each(playlistItems, function(index){
         currentPlaylist.push({id: playlistItems[index].id, title: playlistItems[index].snippet.title, rating: 0});
     });
