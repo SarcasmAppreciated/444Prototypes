@@ -198,7 +198,7 @@ function search(query) {
 
     request.execute(function(response) {
         var str = JSON.stringify(response.result);
-        console.log(str);
+        console.log(response.result);
     });
 }
 
