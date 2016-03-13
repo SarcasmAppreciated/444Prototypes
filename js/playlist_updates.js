@@ -229,32 +229,35 @@ function bindResults() {
      
         hideSearch();                    
     });
+    
     function rebindRating() {
-        $(".track_rating").unbind('click').click(function(){
-            var rating = rateTrack($(this));
-            $(this).children("p").text(rating);        
-            checkRating (rating, $(this));
+        $(".arrow_up").unbind('click').click(function(){
+            var $parent = $(this).parent(".track_rating");
+            var rating = rateTrack($parent);
+            $parent.children("p").text(rating);        
+            checkRating (rating, $parent);
         });    
     }
 
     function rateTrack($id) {
         var curr = "";                                        
-        if($id.attr("state") == 0) {
+        if($id.attr("state") != 1) {
+            // $id.children("p").css("color", "#00a651");
+            curr = parseInt($id.children("p").text()) + 1;
+            $id.attr("state", 1);            
+        } else {
+            // $id.children("p").css("color", "#ff0000");
+            curr = parseInt($id.children("p").text()) - 1;                          
+        } 
+        
+        return curr;
+        /*
+        else if($id.attr("state") == 2) {
             $id.children("p").css("color", "#00a651");
-            curr = parseInt($id.text()) + 1;
+            curr = -1 * (parseInt($id.children("p").text())) + 1;
             $id.attr("state", 1);
             return curr;
-        } else if($id.attr("state") == 1) {
-            $id.children("p").css("color", "#ff0000");
-            curr = parseInt($id.text());
-            $id.attr("state", 2);
-            return -1 * curr;                            
-        } else if($id.attr("state") == 2) {
-            $id.children("p").css("color", "#00a651");
-            curr = -1 * (parseInt($id.text())) + 1;
-            $id.attr("state", 1);
-            return curr;
-        }
+        }*/
     }
 
     function checkRating (num, $id){
