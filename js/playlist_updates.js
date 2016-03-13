@@ -201,8 +201,13 @@ function search(query) {
     });
 }
 
-function populateResults() {
-    
+function populateResults(resultItems) {
+    $("#results").empty();
+    setTimeout(function(){
+        $.each(resultItems, function(index) {
+            $("#results").append("<div class='result_track' value=" + resultsItems[index].id.videoId + "><p> " + resultsItems[index].snippet.title + "</p></div>");          
+        });
+    }, 500);
 }
 
 
