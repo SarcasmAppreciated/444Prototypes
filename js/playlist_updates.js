@@ -39,7 +39,7 @@ function createPlaylist() {
 }
 
 function joinPlaylist() {
-    $(".start_screen_button").fadeOut("slow");
+    $("#join_button, #playlist_button").fadeOut("slow");
     $(".join_field").fadeIn("slow").css("display", "inline-block");
     $("#join_check").click(function() {
         playlistId = $('#join_id').val();
