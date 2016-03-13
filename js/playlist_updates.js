@@ -190,6 +190,7 @@ function removeFromPlaylist(pid) {
 
 function search(query) {
     var q = query;
+    console.log (q);
     var request = gapi.client.youtube.search.list({
         q: q,
         part: 'snippet'
