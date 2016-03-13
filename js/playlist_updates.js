@@ -228,6 +228,54 @@ function bindResults() {
         $(".fa-play").addClass("fa-pause");
      
         hideSearch();                    
-    });   
+    });
+    function rebindRating() {
+        $(".track_rating").unbind('click').click(function(){
+            var rating = rateTrack($(this));
+            console.log(currentPlaylist);
+            $(this).text(rating);        
+            checkRating (rating, $(this));
+        });    
+    }
+
+    function rateTrack($id) {
+        var curr = "";                                        
+        if($id.attr("state") == 0) {
+            $id.css("color", "#00a651");
+            curr = parseInt($id.text()) + 1;
+            $id.attr("state", 1);
+            return curr;
+        } else if($id.attr("state") == 1) {
+            $id.css("color", "#ff0000");
+            curr = parseInt($id.text());
+            $id.attr("state", 2);
+            return -1 * curr;                            
+        } else if($id.attr("state") == 2) {
+            $id.css("color", "#00a651");
+            curr = -1 * (parseInt($id.text())) + 1;
+            $id.attr("state", 1);
+            return curr;
+        }
+    }
+
+    function checkRating (num, $id){
+        var rating = parseInt(num);
+        if (rating < -2)
+            removeVideo($id);
+    }                
+
+    function removeVideo($id) {
+        var tid = $id.attr("value");
+        console.log(tid);
+        removeFromPlaylist(tid);
+        currentPlaylist.splice($id.attr("index"), 1);
+        removePlaylistObject($id);
+        reValueIndex();
+    }
+                                                    
+    function hideSearch() {
+        $("#search_area").fadeOut("slow");
+        $("#search").css({"background-color" : "#e6e6e6", "color" : "#000"});
+    }
 }
 
