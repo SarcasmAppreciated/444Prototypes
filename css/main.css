@@ -266,6 +266,15 @@ button.start_screen_button p {
     display: none;
 }
 
+#join_id {
+    width: 200px;
+    height: 30px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 2px;
+    color: #f76f2c;
+}
+
 @media (max-width: 800px) {
 	body {
 		overflow: hidden;

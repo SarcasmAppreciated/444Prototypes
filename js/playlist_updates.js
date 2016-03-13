@@ -39,9 +39,11 @@ function createPlaylist() {
 }
 
 function joinPlaylist() {
+    $("#playlist-button").fadeOut("slow");
     $("#join_id").fadeIn("slow");
     $("#join_check").click(function() {
         playlistId = $('#join_id').val();
+        requestVideoPlaylist(playlistId, false);
     });    
 }
 
@@ -78,13 +80,13 @@ function addToPlaylist(id, startPos, endPos) {
     }
   });
   request.execute(function(response) {
-        requestVideoPlaylist(getPlaylistID());
+        requestVideoPlaylist(getPlaylistID(), true);
         $('#status').html('<pre>' + JSON.stringify(response.result) + '</pre>');
   });
 }
 
 // Retrieve the list of videos in the specified playlist.
-function requestVideoPlaylist(playlistId, pageToken) {  
+function requestVideoPlaylist(playlistId, isAdd, pageToken) {  
     if(playlistId != undefined) {    
         var pIID;
         var requestOptions = {
@@ -98,9 +100,20 @@ function requestVideoPlaylist(playlistId, pageToken) {
         var request = gapi.client.youtube.playlistItems.list(requestOptions);
         request.execute(function(response) {
             var playlistItems = response.items;
-            addPlaylistObject(playlistItems);
+            if(isAdd)
+                addPlaylistObject(playlistItems);
+            else {
+                recreatePlaylistObject(playlistItems);
+            }
         }); 
     }
+}
+
+function recreatePlaylistObject(playlistItems) {
+    $.each(playlistItems, function(index){
+        currentPlaylist.push({id: playlistItems[index].id, title: playlistItems[index].snippet.title, rating: 0});
+    });
+    createEntireTrackList();
 }
 
 function addPlaylistObject(playlistItems) {
@@ -115,6 +128,15 @@ function removePlaylistObject($id) {
 
 function getPlaylistObject(){
     return currentPlaylist;
+}
+
+function createEntireTrackList() {
+    for(var i = player.getPlaylistIndex(); i < currentPlaylist.length; i++) {
+        if(i == 0)
+            $("#playlist").append("<div class='playlist_track'><div class='track_num'>></div><div class='track_artist_song'><h3 style='margin-top: 10px;'>" + currentPlaylist[i].title.substring(0, currentPlaylist[i].title.indexOf(" - ")) +"</h3><h2>" + currentPlaylist[i].title.substring(currentPlaylist[i].title.indexOf(" - ") + 3, currentPlaylist[i].title.length) + "</h2></div><div index=" + i + " value= '" + currentPlaylist[i].id +"' state='0' class='track_rating'>" + currentPlaylist[i].rating + "</div></div>");
+        else
+            $("#playlist").append("<div class='playlist_track'><div class='track_num'>" + i +"</div><div class='track_artist_song'><h3 style='margin-top: 10px;'>" + currentPlaylist[i].title.substring(0, currentPlaylist[i].title.indexOf(" - ")) +"</h3><h2>" + currentPlaylist[i].title.substring(currentPlaylist[i].title.indexOf(" - ") + 3, currentPlaylist[i].title.length) + "</h2></div><div index=" + i + " value= '" + currentPlaylist[i].id +"' state='0' class='track_rating'>" + currentPlaylist[i].rating + "</div></div>");
+    }
 }
 
 function createTrack(i){
