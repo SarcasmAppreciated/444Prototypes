@@ -27,10 +27,10 @@
                 <div class="full_screen" id="start_screen">
                     <div>
                         <div id="logo"></div>
-						
                         <button class="start_screen_button" id="login-link"><p>Login</p></button>
-                        <button class="start_screen_button" id="playlist-button" disabled onclick="createPlaylist()"><p>Create Playlist</p></button>
-
+                        <button class="start_screen_button disabled_button reveal" id="playlist_button" disabled onclick="createPlaylist()"><p>Create Playlist</p></button>
+                        <input value="" id="join_id" class="join_field"></input><div class="fa fa-check-square fa-2x reveal join_field" id="join_check" style="color: #FFF;"></div>
+                        <button class="start_screen_button disabled_button" id="join_button" disabled onclick="joinPlaylist()"><p>Join A Playlist</p></button>
                     </div>
                 </div>
                 <div class="full_screen">
@@ -38,28 +38,27 @@
                     <br/>
                     <h1 class="fa fa-spin fa-gear fa-4x" style="color: #FFF;"></h1>
                 </div>
-				
                 <div class="nav_bar" style="border-bottom: 1px solid #999;">
                     <div class="nav_button" id="search"><p>+ Add Songs</p></div>
                     <div class="nav_button" id="collaborate" style="background-color: #f76f2c; color: #FFF;"><p>Collaborate!</p></div>
                 </div>
                 <div id="collab_field">
-                    <input value="" id="playlist-id"></input><div class="fa fa-check-square fa-2x"></div>
+                    <p>Share this link!</p>
+                    <input value="" id="playlist-id"></input><div class="fa fa-check-square fa-2x" id="collab_check"></div>
                 </div>
                 <div id="active_area">
                     <div id="search_area">
                         <div class="fa fa-search" style="color: #FFF; margin-right: 5px;"></div><input id="search_bar"></input>
                         <div id="results">
-                            <div class="result_track" value="QtLXvh8mv3o" artist="ODESZA" track="SAY MY NAME (LUKE CHRISTOPHER REMIX)">
+                            <div class="result_track" value="QtLXvh8mv3o">
                                 <p>ODESZA - SAY MY NAME (LUKE CHRISTOPHER REMIX)</p>
                             </div>
-                            <div class="result_track" value="YykjpeuMNEk" artist="COLDPLAY" track="HYMM FOR THE WEEKEND">
+                            <div class="result_track" value="YykjpeuMNEk">
                                 <p>COLDPLAY - HYMM FOR THE WEEKEND</p>
                             </div>
                         </div>
-                        <div class="fa fa-close fa-4x" id="cancel"></div>
+                        <div class="fa fa-close fa-3x" id="cancel"><p>Cancel</p></div>
                     </div>
-
                     <div id="playlist">                
                         <!--<div class="playlist_track">
                             <div class="track_num">></div>
@@ -68,7 +67,7 @@
                                 <h3 style="margin-top: 10px;">ODESZA</h3>
                                 <h2>SAY MY NAME (FEAT. ZYRA)</h2>
                             </div>
-                            <div class="track_rating">12</div>
+                            <div class="track_rating"><div class="arrowUp"></div><p>12</p><div class="arrowDown"></div></div>
                         </div>-->
                     </div>
                 </div>
@@ -81,7 +80,6 @@
                 </div>
             </div>            
         </div>
-        <input id="delete_item"></input>
         <div id="player"></div>
         <script>        
             var isPlaying = false;
@@ -125,25 +123,34 @@
                 });
                 
                 $("#skip").click(function(){
-                    player.nextVideo();                    
+                    player.nextVideo();
+                    removeFirstTrack();
                     nowPlaying();
+                    reValueOrder();
                 });
             }
 
             function onPlayerStateChange(event) {
-                if (event.data == YT.PlayerState.ENDED) {
-                    nowPlaying();
+                if(event.data == YT.PlayerState.PLAYING){
+                    isPlaying = true;
+                } else if (event.data == YT.PlayerState.ENDED) {
+                    isPlaying = false;
+                    removeFirstTrack();                    
                 }
+                nowPlaying();
             }
             
-            function nowPlaying() {                
+            function removeFirstTrack() {
                 $(".playlist_track").first().remove();
-                $(".track_num").delay(500).first().text(">");
-                $("#now_playing").delay(500).text($(".track_artist_song").first().find("h3").text() + " - " + $(".track_artist_song").first().find("h2").text());
             }
             
-            $( document).ready(function (){            
-                $("#playlist-button").click(function(){
+            function nowPlaying() {
+                var arr = getPlaylistObject();
+                $("#now_playing").text(arr[player.getPlaylistIndex()].title);
+            }
+            
+            $( document).ready(function (){                
+                $(".reveal").click(function(){
                     $("#start_screen").fadeOut("slow", function(){
                         $(".full_screen").delay(500).fadeOut("slow");
                     });                    
@@ -153,121 +160,38 @@
                     $(this).css({"background-color" : "#222", "color" : "#FFF"});
                     $("#search_area").fadeIn("slow");
                     $("#collab_field").fadeOut("slow");
-                })
-
-                var isFirst = true;  
-                $(".result_track").click(function(){
-                    var trackID = $(this).attr("value")
-                    addVideoToPlaylist(trackID);
-                   
-                    var artist = $(this).attr("artist");
-                    var track = $(this).attr("track");                    
-                    
-                    setTimeout(function(){
-                        player.loadPlaylist({list: getPlaylistID(),
-                        listType:"playlist",
-                        index:player.getPlaylistIndex(),
-                        startSeconds: player.getCurrentTime(),
-                        suggestedQuality:"default"});                        
+                });
+                
+                var timer;
+                $("#search_bar").on("input", function() {
+                    clearTimeout(timer);
+                    timer = setTimeout(function() {
+                        search($("#search_bar").val());
                     }, 1000);
+                });
+                
+                bindResults();
 
-                    isPlaying = true;
-                    $(".fa-play").addClass("fa-pause");
-                   
-                    var reducedCount = 0; 
-                    
-                    if(isFirst) {
-                        $("#playlist").append("<div class='playlist_track'><div class='track_num'>></div><div class='track_artist_song'><h3 style='margin-top: 10px;'>" + artist +"</h3><h2>" + track + "</h2></div><div value= '" + reducedCount +"' state='0' class='track_rating'>0</div></div>");
-                        $("#now_playing").delay(500).text($(".track_artist_song").first().find("h3").text() + " - " + $(".track_artist_song").first().find("h2").text());
-                    } else
-                        $("#playlist").append("<div class='playlist_track'><div class='track_num'>0</div><div class='track_artist_song'><h3 style='margin-top: 10px;'>" + artist +"</h3><h2>" + track + "</h2></div><div value= '" + reducedCount +"' state='0' class='track_rating'>0</div></div>");
-
-                    isFirst = false;
-                    hideSearch();
-                    
-                    $(".track_rating").unbind('click').click(function(){
-                        $(this).text(rateTrack($(this)));
-                        
-                        checkRating ($(this).text(), $(this));
-                    });
-                    
-                    reValue();
-                });                
+				$("body").keydown(function(e) {
+					if(e.keyCode == 39) { // right
+						$("#skip").fadeOut("slow");
+					} else if(e.keyCode == 37) { // left
+						$("#skip").fadeIn("slow");
+					}
+				});
 
                 $("#cancel").click(function(){
-                    hideSearch();
+                    $("#search_area").fadeOut("slow");
+                    $("#search").css({"background-color" : "#e6e6e6", "color" : "#000"});
                 });
                 
                 $("#collaborate").click(function(){
                     $("#collab_field").fadeIn("slow");
                 });
                 
-                $(".fa-check-square").click(function(){
+                $("#collab_check").click(function(){
                     $("#collab_field").fadeOut("slow");
                 });
-                
-                function rateTrack($id) {
-                    var curr = "";                                        
-                    if($id.attr("state") == 0) {
-                        $id.css("color", "#00a651");
-                        curr = parseInt($id.text()) + 1;
-                        $id.attr("state", 1);
-                        return curr;
-                    } else if($id.attr("state") == 1) {
-                        $id.css("color", "#ff0000");
-                        curr = parseInt($id.text());
-                        $id.attr("state", 2);
-                        return -1 * curr;                            
-                    } else if($id.attr("state") == 2) {
-                        $id.css("color", "#00a651");
-                        curr = -1 * (parseInt($id.text())) + 1;
-                        $id.attr("state", 1);
-                        return curr;
-                    }
-                }
-                
-                function checkRating (num, $id){
-                    var rating = parseInt(num);
-                    if (rating < -2)
-                        removeVideo($id);
-                }                
-                
-                function removeVideo($id) {
-                    requestVideoPlaylist(getPlaylistID(), $id.attr("value"));                    
-                    
-                    setTimeout(function(){
-                        if($id.parent().find(".track_num").text() == ">") {
-                            $id.parent().next().find(".track_num").text(">");
-                            player.nextVideo();
-                            $("#now_playing").delay(2000).text($(".track_artist_song").first().find("h3").text() + " - " + $(".track_artist_song").first().find("h2").text());
-                        }
-                    $id.parent().remove();                       
-                    }, 1000);
-                    
-                    setTimeout(function(){
-                        removeFromPlaylist($("#delete_item").val());
-
-                        reValue();              
-                    }, 2000);
-                    
-                }
-                
-                function reValue() {
-                    $(".track_num").each(function(index){
-                        if(index == 0)
-                            $(this).text(">");
-                        else
-                            $(this).text(index);
-                    });  
-                    $(".track_rating").each(function(index){
-                        $(this).attr("value", index);
-                    });  
-                }
-                                
-                function hideSearch() {
-                    $("#search_area").fadeOut("slow");
-                    $("#search").css({"background-color" : "#e6e6e6", "color" : "#000"});
-                }
             });
         </script>
     </body>
