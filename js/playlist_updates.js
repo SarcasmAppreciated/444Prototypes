@@ -207,7 +207,27 @@ function populateResults(resultItems) {
         $.each(resultItems, function(index) {
             $("#results").append("<div class='result_track' value=" + resultItems[index].id.videoId + "><p> " + resultItems[index].snippet.title + "</p></div>");          
         });
+        bindResults();
     }, 500);
 }
 
+function bindResults() {
+    $(".result_track").click(function(){
+        var trackID = $(this).attr("value")
+        addVideoToPlaylist(trackID);     
+        
+        setTimeout(function(){
+            loadCurrentPlaylist();
+        }, 1000);
+        
+        setTimeout(function(){
+            rebindRating();
+            reValueOrder();
+        }, 1500);
+
+        $(".fa-play").addClass("fa-pause");
+     
+        hideSearch();                    
+    });   
+}
 

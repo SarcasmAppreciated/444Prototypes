@@ -170,24 +170,7 @@
                     }, 1000);
                 });
                 
-                $(".result_track").click(function(){
-                    var trackID = $(this).attr("value")
-                    addVideoToPlaylist(trackID);     
-                    
-                    setTimeout(function(){
-                        loadCurrentPlaylist();
-                    }, 1000);
-                    
-                    setTimeout(function(){
-                        rebindRating();
-                        reValueOrder();
-                    }, 1500);
-                    
-                    isPlaying = true;
-                    $(".fa-play").addClass("fa-pause");
-                 
-                    hideSearch();                    
-                });
+                bindResults();
 
 				$("body").keydown(function(e) {
 					if(e.keyCode == 39) { // right
