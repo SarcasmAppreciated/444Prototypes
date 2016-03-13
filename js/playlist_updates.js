@@ -229,56 +229,57 @@ function bindResults() {
      
         hideSearch();                    
     });
-    
-    function rebindRating() {
-        $(".arrow_up").unbind('click').click(function(){
-            alert();
-            var $parent = $(this).parent(".track_rating");
-            var rating = rateTrack($parent);
-            $parent.children("p").text(rating);        
-            checkRating (rating, $parent);
-        });    
-    }
-
-    function rateTrack($id) {
-        var curr = "";                                        
-        if($id.attr("state") != 1) {
-            // $id.children("p").css("color", "#00a651");
-            curr = parseInt($id.children("p").text()) + 1;
-            $id.attr("state", 1);            
-        } else {
-            // $id.children("p").css("color", "#ff0000");
-            curr = parseInt($id.children("p").text()) - 1;                          
-        } 
-        
-        return curr;
-        /*
-        else if($id.attr("state") == 2) {
-            $id.children("p").css("color", "#00a651");
-            curr = -1 * (parseInt($id.children("p").text())) + 1;
-            $id.attr("state", 1);
-            return curr;
-        }*/
-    }
-
-    function checkRating (num, $id){
-        var rating = parseInt(num);
-        if (rating < -2)
-            removeVideo($id);
-    }                
-
-    function removeVideo($id) {
-        var tid = $id.attr("value");
-        console.log(tid);
-        removeFromPlaylist(tid);
-        currentPlaylist.splice($id.attr("index"), 1);
-        removePlaylistObject($id);
-        reValueIndex();
-    }
-                                                    
-    function hideSearch() {
-        $("#search_area").fadeOut("slow");
-        $("#search").css({"background-color" : "#e6e6e6", "color" : "#000"});
-    }
 }
+    
+function rebindRating() {
+    $(".arrow_up").unbind('click').click(function(){
+        alert();
+        var $parent = $(this).parent(".track_rating");
+        var rating = rateTrack($parent);
+        $parent.children("p").text(rating);        
+        checkRating (rating, $parent);
+    });    
+}
+
+function rateTrack($id) {
+    var curr = "";                                        
+    if($id.attr("state") != 1) {
+        // $id.children("p").css("color", "#00a651");
+        curr = parseInt($id.children("p").text()) + 1;
+        $id.attr("state", 1);            
+    } else {
+        // $id.children("p").css("color", "#ff0000");
+        curr = parseInt($id.children("p").text()) - 1;                          
+    } 
+    
+    return curr;
+    /*
+    else if($id.attr("state") == 2) {
+        $id.children("p").css("color", "#00a651");
+        curr = -1 * (parseInt($id.children("p").text())) + 1;
+        $id.attr("state", 1);
+        return curr;
+    }*/
+}
+
+function checkRating (num, $id){
+    var rating = parseInt(num);
+    if (rating < -2)
+        removeVideo($id);
+}                
+
+function removeVideo($id) {
+    var tid = $id.attr("value");
+    console.log(tid);
+    removeFromPlaylist(tid);
+    currentPlaylist.splice($id.attr("index"), 1);
+    removePlaylistObject($id);
+    reValueIndex();
+}
+                                                
+function hideSearch() {
+    $("#search_area").fadeOut("slow");
+    $("#search").css({"background-color" : "#e6e6e6", "color" : "#000"});
+}
+
 
