@@ -168,6 +168,9 @@ button.start_screen_button p {
 #cancel {
     margin-top: 150px;
     color: #FFF;
+}
+
+#cancel p {
     font-family: 'Oswald', Arial, sans-serif;
 }
 
