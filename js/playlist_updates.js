@@ -134,9 +134,9 @@ function getPlaylistObject(){
 function createEntireTrackList() {
     for(var i = player.getPlaylistIndex(); i < currentPlaylist.length; i++) {
         if(i == 0)
-            $("#playlist").append("<div class='playlist_track'><div class='track_num'>></div><div class='track_artist_song'><h3 style='margin-top: 10px;'>" + currentPlaylist[i].title.substring(0, currentPlaylist[i].title.indexOf(" - ")) +"</h3><h2>" + currentPlaylist[i].title.substring(currentPlaylist[i].title.indexOf(" - ") + 3, currentPlaylist[i].title.length) + "</h2></div><div index=" + i + " value= '" + currentPlaylist[i].id +"' state='0' class='track_rating'>" + currentPlaylist[i].rating + "</div></div>");
+            $("#playlist").append("<div class='playlist_track'><div class='track_num'>></div><div class='track_artist_song'><h3 style='margin-top: 10px;'>" + currentPlaylist[i].title.substring(0, currentPlaylist[i].title.indexOf(" - ")) +"</h3><h2>" + currentPlaylist[i].title.substring(currentPlaylist[i].title.indexOf(" - ") + 3, currentPlaylist[i].title.length) + "</h2></div><div index=" + i + " value= '" + currentPlaylist[i].id +"' state='0' class='track_rating'><div class='arrow_up'></div><p>" + currentPlaylist[i].rating + "</p><div class='arrow_down'></div></div></div>");
         else
-            $("#playlist").append("<div class='playlist_track'><div class='track_num'>" + i +"</div><div class='track_artist_song'><h3 style='margin-top: 10px;'>" + currentPlaylist[i].title.substring(0, currentPlaylist[i].title.indexOf(" - ")) +"</h3><h2>" + currentPlaylist[i].title.substring(currentPlaylist[i].title.indexOf(" - ") + 3, currentPlaylist[i].title.length) + "</h2></div><div index=" + i + " value= '" + currentPlaylist[i].id +"' state='0' class='track_rating'>" + currentPlaylist[i].rating + "</div></div>");
+            $("#playlist").append("<div class='playlist_track'><div class='track_num'>" + i +"</div><div class='track_artist_song'><h3 style='margin-top: 10px;'>" + currentPlaylist[i].title.substring(0, currentPlaylist[i].title.indexOf(" - ")) +"</h3><h2>" + currentPlaylist[i].title.substring(currentPlaylist[i].title.indexOf(" - ") + 3, currentPlaylist[i].title.length) + "</h2></div><div index=" + i + " value= '" + currentPlaylist[i].id +"' state='0' class='track_rating'><div class='arrow_up'></div><p>" + currentPlaylist[i].rating + "</p><div class='arrow_down'></div></div></div>");
     }
     setTimeout(function(){
         loadCurrentPlaylist();
@@ -154,9 +154,9 @@ function loadCurrentPlaylist() {
 
 function createTrack(i){
     if(i == 0)
-        $("#playlist").append("<div class='playlist_track'><div class='track_num'>></div><div class='track_artist_song'><h3 style='margin-top: 10px;'>" + currentPlaylist[i].title.substring(0, currentPlaylist[i].title.indexOf(" - ")) +"</h3><h2>" + currentPlaylist[i].title.substring(currentPlaylist[i].title.indexOf(" - ") + 3, currentPlaylist[i].title.length) + "</h2></div><div index=" + i + " value= '" + currentPlaylist[i].id +"' state='0' class='track_rating'>" + currentPlaylist[i].rating + "</div></div>");
+        $("#playlist").append("<div class='playlist_track'><div class='track_num'>></div><div class='track_artist_song'><h3 style='margin-top: 10px;'>" + currentPlaylist[i].title.substring(0, currentPlaylist[i].title.indexOf(" - ")) +"</h3><h2>" + currentPlaylist[i].title.substring(currentPlaylist[i].title.indexOf(" - ") + 3, currentPlaylist[i].title.length) + "</h2></div><div index=" + i + " value= '" + currentPlaylist[i].id +"' state='0' class='track_rating'><div class='arrow_up'></div><p>" + currentPlaylist[i].rating + "</p><div class='arrow_down'></div></div></div>");
     else
-        $("#playlist").append("<div class='playlist_track'><div class='track_num'>" + i +"</div><div class='track_artist_song'><h3 style='margin-top: 10px;'>" + currentPlaylist[i].title.substring(0, currentPlaylist[i].title.indexOf(" - ")) +"</h3><h2>" + currentPlaylist[i].title.substring(currentPlaylist[i].title.indexOf(" - ") + 3, currentPlaylist[i].title.length) + "</h2></div><div index=" + i + " value= '" + currentPlaylist[i].id +"' state='0' class='track_rating'>" + currentPlaylist[i].rating + "</div></div>");
+        $("#playlist").append("<div class='playlist_track'><div class='track_num'>" + i +"</div><div class='track_artist_song'><h3 style='margin-top: 10px;'>" + currentPlaylist[i].title.substring(0, currentPlaylist[i].title.indexOf(" - ")) +"</h3><h2>" + currentPlaylist[i].title.substring(currentPlaylist[i].title.indexOf(" - ") + 3, currentPlaylist[i].title.length) + "</h2></div><div index=" + i + " value= '" + currentPlaylist[i].id +"' state='0' class='track_rating'><div class='arrow_up'></div><p>" + currentPlaylist[i].rating + "</p><div class='arrow_down'></div></div></div>");
 }
 
 function reValueOrder() {
@@ -232,8 +232,7 @@ function bindResults() {
     function rebindRating() {
         $(".track_rating").unbind('click').click(function(){
             var rating = rateTrack($(this));
-            console.log(currentPlaylist);
-            $(this).text(rating);        
+            $(this).children("p").text(rating);        
             checkRating (rating, $(this));
         });    
     }
@@ -241,17 +240,17 @@ function bindResults() {
     function rateTrack($id) {
         var curr = "";                                        
         if($id.attr("state") == 0) {
-            $id.css({"color" : "#00a651", "background" : "url('../images/Arrow.png') center no-repeat"});
+            $id.children("p").css("color", "#00a651");
             curr = parseInt($id.text()) + 1;
             $id.attr("state", 1);
             return curr;
         } else if($id.attr("state") == 1) {
-            $id.css({"color" : "#ff0000", "background" : "url('../images/ArrowDown.png') center no-repeat"});
+            $id.children("p").css("color", "#ff0000");
             curr = parseInt($id.text());
             $id.attr("state", 2);
             return -1 * curr;                            
         } else if($id.attr("state") == 2) {
-            $id.css({"color" : "#00a651", "background" : "url('../images/Arrow.png') center no-repeat"});
+            $id.children("p").css("color", "#00a651");
             curr = -1 * (parseInt($id.text())) + 1;
             $id.attr("state", 1);
             return curr;
