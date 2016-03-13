@@ -262,7 +262,7 @@ button.start_screen_button p {
    cursor: pointer;
 }
 
-#player, #delete_item, #join_id {
+#player, #delete_item, .join_field{
     display: none;
 }
 
