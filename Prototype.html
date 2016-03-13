@@ -181,7 +181,8 @@
 				});
 
                 $("#cancel").click(function(){
-                    hideSearch();
+                    $("#search_area").fadeOut("slow");
+                    $("#search").css({"background-color" : "#e6e6e6", "color" : "#000"});
                 });
                 
                 $("#collaborate").click(function(){
