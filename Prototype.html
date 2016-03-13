@@ -167,11 +167,7 @@
                     var track = $(this).attr("track");                    
                     
                     setTimeout(function(){
-                        player.loadPlaylist({list: getPlaylistID(),
-                        listType:"playlist",
-                        index:player.getPlaylistIndex(),
-                        startSeconds: player.getCurrentTime(),
-                        suggestedQuality:"default"});
+                        loadCurrentPlaylist();
                     }, 1000);
                     
                     setTimeout(function(){

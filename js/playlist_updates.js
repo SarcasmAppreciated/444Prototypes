@@ -137,6 +137,17 @@ function createEntireTrackList() {
         else
             $("#playlist").append("<div class='playlist_track'><div class='track_num'>" + i +"</div><div class='track_artist_song'><h3 style='margin-top: 10px;'>" + currentPlaylist[i].title.substring(0, currentPlaylist[i].title.indexOf(" - ")) +"</h3><h2>" + currentPlaylist[i].title.substring(currentPlaylist[i].title.indexOf(" - ") + 3, currentPlaylist[i].title.length) + "</h2></div><div index=" + i + " value= '" + currentPlaylist[i].id +"' state='0' class='track_rating'>" + currentPlaylist[i].rating + "</div></div>");
     }
+    setTimeout(function(){
+        loadCurrentPlaylist();
+    }, 1000);
+}
+
+function loadCurrentPlaylist() {
+    player.loadPlaylist({list: getPlaylistID(),
+                        listType:"playlist",
+                        index:player.getPlaylistIndex(),
+                        startSeconds: player.getCurrentTime(),
+                        suggestedQuality:"default"});    
 }
 
 function createTrack(i){
