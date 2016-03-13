@@ -197,7 +197,7 @@ function search(query) {
     });
     request.execute(function(response) {
         var resultItems = response.items;
-        console.log(resultItems);
+        populateResults(resultItems);
     });
 }
 
