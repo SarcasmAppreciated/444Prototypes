@@ -40,7 +40,7 @@ function createPlaylist() {
 
 function joinPlaylist() {
     $("#playlist-button").fadeOut("slow");
-    $(".join_field").fadeIn("slow");
+    $(".join_field").fadeIn("slow").css("display", "inline-block");
     $("#join_check").click(function() {
         playlistId = $('#join_id').val();
         requestVideoPlaylist(playlistId, false);
