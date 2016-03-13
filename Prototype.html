@@ -131,7 +131,10 @@
             }
 
             function onPlayerStateChange(event) {
-                if (event.data == YT.PlayerState.ENDED) {
+                if(event.data == YT.PlayerState.PLAYING){
+                    isPlaying = true;
+                } else if (event.data == YT.PlayerState.ENDED) {
+                    isPlaying = false;
                     removeFirstTrack();                    
                 }
                 nowPlaying();

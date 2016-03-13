@@ -141,6 +141,7 @@ function createEntireTrackList() {
     setTimeout(function(){
         loadCurrentPlaylist();
     }, 1000);
+    $(".fa-play").addClass("fa-pause");
 }
 
 function loadCurrentPlaylist() {
