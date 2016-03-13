@@ -166,7 +166,7 @@
                 $("#search_bar").on("input", function() {
                     clearTimeout(timer);
                     timer = setTimeout(function() {
-                        search($("search_bar").val());
+                        search($("#search_bar").val());
                     }, 1000);
                 });
                 
