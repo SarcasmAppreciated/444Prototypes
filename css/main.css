@@ -75,15 +75,12 @@ button.start_screen_button {
     cursor: pointer;
 }
 
-#login-link {
-    margin-bottom: 20px;
-}
-
 button.start_screen_button :active {
     font-size: 19px;
 }
 
 button.start_screen_button p {
+    margin-top: 20px;
     font-size: 20px;
     text-transform: uppercase;
     font-family: 'Oswald', Arial, sans-serif;
