@@ -142,7 +142,7 @@ function createEntireTrackList() {
         loadCurrentPlaylist();
     }, 1000);
     $(".fa-play").addClass("fa-pause");
-    bindResults();
+    rebindRating();
 }
 
 function loadCurrentPlaylist() {
