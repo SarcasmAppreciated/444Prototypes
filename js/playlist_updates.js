@@ -173,20 +173,19 @@ function reValueIndex() {
     var len = 0;
     $(".track_rating").each(function() {
         len++;
-    });
-    
+    });    
     for (var i = player.getPlaylistIndex(); i < len; i++) {
         $(".track_rating").attr("index", i); 
     }
 }
 
 function removeFromPlaylist(pid) {  
-  var request = gapi.client.youtube.playlistItems.delete({
-    id: pid
-  });
-  request.execute(function(response) {
-    $('#status').html('<pre>' + JSON.stringify(response.result) + '</pre>');
-  });
+    var request = gapi.client.youtube.playlistItems.delete({
+        id: pid
+    });
+    request.execute(function(response) {
+        $('#status').html('<pre>' + JSON.stringify(response.result) + '</pre>');
+    });
 }
 
 function search(query) {
@@ -195,11 +194,14 @@ function search(query) {
         q: q,
         part: 'snippet'
     });
-
     request.execute(function(response) {
-        var str = JSON.stringify(response.result);
-        console.log(response.result);
+        var resultItems = response.items;
+        console.log(resultItems);
     });
+}
+
+function populateResults() {
+    
 }
 
 

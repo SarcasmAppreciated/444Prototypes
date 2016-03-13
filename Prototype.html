@@ -50,10 +50,10 @@
                     <div id="search_area">
                         <div class="fa fa-search" style="color: #FFF; margin-right: 5px;"></div><input id="search_bar"></input>
                         <div id="results">
-                            <div class="result_track" value="QtLXvh8mv3o" artist="ODESZA" track="SAY MY NAME (LUKE CHRISTOPHER REMIX)">
+                            <div class="result_track" value="QtLXvh8mv3o">
                                 <p>ODESZA - SAY MY NAME (LUKE CHRISTOPHER REMIX)</p>
                             </div>
-                            <div class="result_track" value="YykjpeuMNEk" artist="COLDPLAY" track="HYMM FOR THE WEEKEND">
+                            <div class="result_track" value="YykjpeuMNEk">
                                 <p>COLDPLAY - HYMM FOR THE WEEKEND</p>
                             </div>
                         </div>
@@ -162,16 +162,17 @@
                     $("#collab_field").fadeOut("slow");
                 });
                 
+                var timer;
                 $("#search_bar").on("input", function() {
-                    search($(this).val());
+                    clearTimeout(timer);
+                    timer = setTimeout(function() {
+                        search($(this).val());
+                    }, 1000);
                 });
                 
                 $(".result_track").click(function(){
                     var trackID = $(this).attr("value")
-                    addVideoToPlaylist(trackID);
-                   
-                    var artist = $(this).attr("artist");
-                    var track = $(this).attr("track");                    
+                    addVideoToPlaylist(trackID);     
                     
                     setTimeout(function(){
                         loadCurrentPlaylist();
