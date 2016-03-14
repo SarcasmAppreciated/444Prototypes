@@ -314,6 +314,13 @@ button.start_screen_button p {
 		display: block;
 		box-shadow: none;
 	}
+	#start_mobile {
+		width: 280px;
+		display: inline-block;
+	}
+	#logo {
+		margin-bottom: 100px;
+	}
 }
 
 
