@@ -296,7 +296,7 @@ button.start_screen_button p {
 }
 
 @media (max-width: 800px) {
-	body {
+	html, body {
 		overflow: hidden;
 	}
 	#phone {
