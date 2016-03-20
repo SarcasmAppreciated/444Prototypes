@@ -173,6 +173,7 @@ button.start_screen_button p {
     bottom: 0;
     border-top: 1px solid #FFF;
     color: #FFF;
+    cursor: pointer;
 }
 
 #cancel p {
@@ -335,6 +336,18 @@ button.start_screen_button p {
     }
     .playlist_track {
         width: 100%;
+    }
+    .track_num {
+        width: 15%;
+    }
+    .track_artist_song {
+        width: 60%;
+    }
+    .track_rating {
+        width: 20%;
+    }
+    .track_rating p {
+        margin-left: 8%;
     }
 	#logo {
         margin-top: 20%;
