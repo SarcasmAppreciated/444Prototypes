@@ -166,7 +166,10 @@ button.start_screen_button p {
 }
 
 #cancel {
-    margin-top: 100px;
+    width: 100%;
+    height: 50px;
+    position: absolute;
+    bottom: 0;
     color: #FFF;
 }
 
@@ -322,8 +325,11 @@ button.start_screen_button p {
         width: 100%;
         height: calc(100% - 50px);
     }
-    #active_area {
+    #active_area {        
         height: calc(100% - 170px);
+    }
+    .playlist_track {
+        width: 100%;
     }
 	#logo {
         margin-top: 20%;
