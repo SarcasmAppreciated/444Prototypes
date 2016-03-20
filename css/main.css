@@ -92,7 +92,7 @@ button.start_screen_button p {
 }
 
 .nav_button {
-    width: 200px;
+    width: 50%;
     height: 50px;
     float: left;
     background-color: #e6e6e6;
@@ -318,6 +318,13 @@ button.start_screen_button p {
 		width: 280px;
 		display: inline-block;
 	}
+    #search_area {
+        width: 100%;
+        height: calc(100% - 170px);    }
+    }
+    #active_area {
+        height: calc(100% - 170px);
+    }
 	#logo {
 		margin-bottom: 100px;
 	}
