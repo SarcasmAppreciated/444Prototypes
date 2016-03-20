@@ -320,13 +320,14 @@ button.start_screen_button p {
 	}
     #search_area {
         width: 100%;
-        height: calc(100% - 170px);    }
+        height: calc(100% - 50px);
     }
     #active_area {
         height: calc(100% - 170px);
     }
 	#logo {
-		margin-bottom: 100px;
+        margin-top: 20%;
+		margin-bottom: 10%;
 	}
 }
 
