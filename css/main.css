@@ -176,6 +176,7 @@ button.start_screen_button p {
 }
 
 #cancel p {
+    margin-top: 10px;
     display: inline;
     font-size: 24px;
     font-family: 'Oswald', Arial, sans-serif;
