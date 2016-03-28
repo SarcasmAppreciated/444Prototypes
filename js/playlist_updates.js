@@ -286,7 +286,6 @@ function removeVideo($id) {
     currentPlaylist.splice($id.attr("index"), 1);
     removePlaylistObject($id);
     reValueIndex();
-    loadCurrentPlaylist();
 }
                                                 
 function hideSearch() {

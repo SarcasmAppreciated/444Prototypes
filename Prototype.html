@@ -125,10 +125,13 @@
                 });
                 
                 $("#skip").click(function(){
-                    player.nextVideo();
-                    removeFirstTrack();
-                    nowPlaying();
-                    reValueOrder();
+                    loadCurrentPlaylist();                    
+                    setTimeout(function(){
+                        player.nextVideo();
+                        removeFirstTrack();
+                        nowPlaying();
+                        reValueOrder();
+                    }, 500);
                 });
             }
 
