@@ -1,0 +1,206 @@
+ <!DOCTYPE html>
+<!--[if lt IE 7]><html class="lt-ie10 lt-ie9 lt-ie8 lt-ie7"><![endif]-->
+<!--[if IE 7]><html class="lt-ie10 lt-ie9 lt-ie8"><![endif]-->
+<!--[if IE 8]><html class="lt-ie10 lt-ie9"> <![endif]-->
+<!--[if IE 9]><html class="lt-ie10"> <![endif]-->
+<!--[if gt IE 9]><!--> <html> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <title>448 Medium Fidelity Prototype</title>
+       
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+				
+        <link href='https://fonts.googleapis.com/css?family=Oswald:300' rel='stylesheet' type='text/css'>
+        <link href='https://fonts.googleapis.com/css?family=Lato:300' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="css/main.css">
+		
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="js/auth.js"></script>
+        <script src="js/playlist_updates.js"></script>
+        <script src="https://apis.google.com/js/client.js?onload=googleApiClientReady"></script>
+    </head>
+    <body>
+        <div id="phone">
+            <div id="screen">
+                <div class="full_screen" id="start_screen">
+                    <div id="start_mobile">	
+                        <div id="logo"></div>
+                        <button class="start_screen_button" id="login-link"><p>Login</p></button>
+                        <button class="start_screen_button disabled_button reveal" id="playlist_button" disabled onclick="createPlaylist()"><p>Create Playlist</p></button>
+                        <input value="" id="join_id" class="join_field"></input><div class="fa fa-check-square fa-2x reveal join_field" id="join_check" style="color: #FFF;"></div>
+                        <button class="start_screen_button disabled_button" id="join_button" disabled onclick="joinPlaylist()"><p>Join A Playlist</p></button>
+               	    </div>
+                </div>
+                <div class="full_screen">
+                    <h1 id="start_up">We're setting up things!</h1>
+                    <br/>
+                    <h1 class="fa fa-spin fa-gear fa-4x" style="color: #FFF;"></h1>
+                </div>
+                <div class="nav_bar" style="border-bottom: 1px solid #999;">
+                    <div class="nav_button" id="search"><p>+ Add Songs</p></div>
+                    <div class="nav_button" id="collaborate" style="background-color: #f76f2c; color: #FFF;"><p>Collaborate!</p></div>
+                </div>
+                <div id="collab_field">
+                    <p>Share this link!</p>
+                    <input value="" id="playlist-id"></input><div class="fa fa-check-square fa-2x" id="collab_check"></div>
+                </div>
+                <div id="active_area">
+                    <div id="search_area">
+                        <div class="fa fa-search" style="color: #FFF; margin-right: 5px;"></div><input id="search_bar"></input>
+                        <div id="results">
+                            <div class="result_track" value="QtLXvh8mv3o">
+                                <p>ODESZA - SAY MY NAME (LUKE CHRISTOPHER REMIX)</p>
+                            </div>
+                            <div class="result_track" value="YykjpeuMNEk">
+                                <p>COLDPLAY - HYMM FOR THE WEEKEND</p>
+                            </div>
+                        </div>
+                        <div id="cancel">
+                            <div class="fa fa-close fa-2x"></div><p>Cancel</p>
+                        </div>
+                    </div>
+                    <div id="playlist">                
+                        <!--<div class="playlist_track">
+                            <div class="track_num">></div>
+                            <div class="track_pic"></div>
+                            <div class="track_artist_song">
+                                <h3 style="margin-top: 10px;">ODESZA</h3>
+                                <h2>SAY MY NAME (FEAT. ZYRA)</h2>
+                            </div>
+                            <div class="track_rating"><div class="arrowUp"></div><p>12</p><div class="arrowDown"></div></div>
+                        </div>-->
+                    </div>
+                </div>
+                <div class="nav_bar" style="height: 120px; background-color: #e6e6e6; border-top: 1px solid #999;">
+                    
+                    <div id="play" class="fa fa-play fa-2x"></div>
+                    <div id="skip" class="fa fa-fast-forward fa-2x"></div>
+                    
+                    <h2><i>Now Playing</i> :<div id="now_playing" style="text-transform: uppercase;"></div></h2>
+                </div>
+            </div>            
+        </div>
+        <div id="player"></div>
+        <script>        
+            var isPlaying = false;
+            var player;
+            
+
+            var tag = document.createElement('script');
+
+            tag.src = "https://www.youtube.com/iframe_api";
+            var firstScriptTag = document.getElementsByTagName('script')[0];
+            firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+            
+            function onYouTubeIframeAPIReady() {
+                player = new YT.Player('player', {
+                    height: '390',
+                    width: '640',
+                    playerVars: 
+                    {
+                        listType:'playlist',
+                        list: 'PL5qjstFaIeLy-MxnFh9nKj3JRRLYACQxv'
+                    },
+                    events: {
+                        'onReady': onPlayerReady,
+                        'onStateChange': onPlayerStateChange
+                    }
+                });
+            }
+
+            function onPlayerReady(event) {
+                $("#play").click(function(){
+                    if(isPlaying) {
+                        player.pauseVideo();
+                        isPlaying = false;
+                        $(".fa-play").removeClass("fa-pause");                        
+                    } else {
+                        player.playVideo();
+                        isPlaying = true;
+                        $(".fa-play").addClass("fa-pause");
+                    }
+                });
+                
+                $("#skip").click(function(){
+                    loadCurrentPlaylist();                    
+                    setTimeout(function(){
+                        player.nextVideo();
+                        removeFirstTrack();
+                        nowPlaying();
+                        reValueOrder();
+                    }, 500);
+                });
+            }
+
+            function onPlayerStateChange(event) {
+                if (event.data == YT.PlayerState.ENDED && isPlaying) {
+                    isPlaying = false;
+                    removeFirstTrack();                    
+                } else if(event.data == YT.PlayerState.PLAYING){
+                    isPlaying = true;
+                }
+                reValueOrder();
+                nowPlaying();
+            }
+            
+            function removeFirstTrack() {
+                $(".playlist_track").first().remove();
+            }
+            
+            function nowPlaying() {
+                var arr = getPlaylistObject();
+                $("#now_playing").text(arr[player.getPlaylistIndex()].title);
+            }
+            
+            $( document).ready(function (){                
+                $(".reveal").click(function(){
+                    $("#start_screen").fadeOut("slow", function(){
+                        $(".full_screen").delay(500).fadeOut("slow");
+                    });                    
+                });                
+            
+                $("#search").click(function(){
+                    $(this).css({"background-color" : "#222", "color" : "#FFF"});
+                    $("#search_area").fadeIn("slow");
+                    $("#collab_field").fadeOut("slow");
+                });
+                
+                var timer;
+                $("#search_bar").on("input", function() {
+                    clearTimeout(timer);
+                    timer = setTimeout(function() {
+                        search($("#search_bar").val());
+                    }, 1000);
+                });
+                
+                bindResults();
+
+				$("body").keydown(function(e) {
+					if(e.keyCode == 39) { // right
+						$("#skip").fadeOut("slow");
+					} else if(e.keyCode == 37) { // left
+						$("#skip").fadeIn("slow");
+					}
+				});
+
+                $("#cancel").click(function(){
+                    $("#search_area").fadeOut("slow");
+                    $("#search").css({"background-color" : "#e6e6e6", "color" : "#000"});
+                });
+                
+                $("#collaborate").click(function(){
+                    $("#collab_field").fadeIn("slow");
+                });
+                
+                $("#collab_check").click(function(){
+                    $("#collab_field").fadeOut("slow");
+                });
+            });
+        </script>
+    </body>
+</html>
+ 
+ 
