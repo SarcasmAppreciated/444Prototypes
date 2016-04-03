@@ -1,10 +1,13 @@
 // Define some variables used to remember state.
 var playlistId;
 var currentPlaylist = [];
+var socket;
+var currentSong = 0;
 
 // After the API loads, call a function to enable the playlist creation form.
 function handleAPILoaded() {
-  enableForm();
+    enableForm();
+    bindSocket();
 }
 
 // Enable the form for creating a playlist.
@@ -31,7 +34,8 @@ function createPlaylist() {
     if (result) {
         playlistId = result.id;
         console.log(playlistId);
-        $('#playlist-id').val("https://www.youtube.com/playlist?list=" + playlistId);      
+        $('#playlist-id').val(playlistId);
+        storePlaylistVar();
     } else {
         alert('Could not create playlist');
     }
@@ -43,7 +47,12 @@ function joinPlaylist() {
     $(".join_field").fadeIn("slow").css("display", "inline-block");
     $("#join_check").click(function() {
         playlistId = $('#join_id').val();
+        $('#playlist-id').val(playlistId);
         requestVideoPlaylist(playlistId, false);
+        $("#play, #skip").fadeOut("slow");
+        player.mute();
+        player.pauseVideo();
+        getCurrentSong();
     });    
 }
 
@@ -81,7 +90,7 @@ function addToPlaylist(id, startPos, endPos) {
   });
   request.execute(function(response) {
         requestVideoPlaylist(getPlaylistID(), true);
-        $('#status').html('<pre>' + JSON.stringify(response.result) + '</pre>');
+        // $('#status').html('<pre>' + JSON.stringify(response.result) + '</pre>');
   });
 }
 
@@ -185,7 +194,7 @@ function removeFromPlaylist(pid) {
         id: pid
     });
     request.execute(function(response) {
-        $('#status').html('<pre>' + JSON.stringify(response.result) + '</pre>');
+        // $('#status').html('<pre>' + JSON.stringify(response.result) + '</pre>');
     });
 }
 
@@ -215,11 +224,14 @@ function populateResults(resultItems) {
 function bindResults() {
     $(".result_track").click(function(){
         var trackID = $(this).attr("value")
+        
+        updateServer();
+        
         addVideoToPlaylist(trackID);     
         
-        setTimeout(function(){
-            loadCurrentPlaylist();
-        }, 1000);
+        // setTimeout(function(){
+            // loadCurrentPlaylist();
+        // }, 1000);
         
         setTimeout(function(){
             rebindRating();
@@ -275,7 +287,7 @@ function rateTrack($id, isUp) {
 
 function checkRating (num, $id){
     var rating = parseInt(num);
-    if (rating < -2)
+    if (rating < -5)
         removeVideo($id);
 }                
 
@@ -283,6 +295,9 @@ function removeVideo($id) {
     var tid = $id.attr("value");
     console.log(tid);
     removeFromPlaylist(tid);
+    
+    updateServer();
+    
     currentPlaylist.splice($id.attr("index"), 1);
     removePlaylistObject($id);
     reValueIndex();
@@ -292,5 +307,56 @@ function hideSearch() {
     $("#search_area").fadeOut("slow");
     $("#search").css({"background-color" : "#e6e6e6", "color" : "#000"});
 }
+
+function bindSocket(){
+    socket = io.connect('http://' + document.domain + ':' + location.port + '/test');                
+    socket.on('my response', function(msg) {
+        console.log(msg.data);
+        if(msg.data == "RefreshList") {            
+            setTimeout(function(){
+                $("#playlist").empty();
+                setTimeout(function(){
+                    requestVideoPlaylist(playlistId, false);  
+                }, 200);                              
+            }, 800);            
+        }
+    });
+}
+
+function updateServer() {
+    socket.emit('my broadcast event', {data: "RefreshList"});    
+}
+
+function storePlaylistVar() {    
+    $.getJSON('/_set_playlist_id', {
+            playlist: playlistId
+        }, function(data) {
+         console.log(data.result);
+    });
+}
+
+function setCurrentSong() {
+    $.getJSON('/_set_current_song', {
+            playlist: playlistId,
+            current: player.getPlaylistIndex()
+        }, function(data) {
+         console.log("SET CS: " + data.result);
+    });    
+}
+
+function getCurrentSong() {
+    $.getJSON('/_get_current_song', {
+            playlist: playlistId
+        }, function(data) {
+         console.log("GET CS: " + data.result);
+    });    
+}
+
+
+
+    
+
+        
+
 
 

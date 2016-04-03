@@ -17,6 +17,7 @@
         <link rel="stylesheet" href="css/main.css">
 		
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="https://cdn.socket.io/socket.io-1.0.0.js"></script>
         <script src="js/auth.js"></script>
         <script src="js/playlist_updates.js"></script>
         <script src="https://apis.google.com/js/client.js?onload=googleApiClientReady"></script>
@@ -87,7 +88,6 @@
             var isPlaying = false;
             var player;
             
-
             var tag = document.createElement('script');
 
             tag.src = "https://www.youtube.com/iframe_api";
@@ -138,12 +138,14 @@
             function onPlayerStateChange(event) {
                 if (event.data == YT.PlayerState.ENDED && isPlaying) {
                     isPlaying = false;
-                    removeFirstTrack();                    
+                    removeFirstTrack();
+                    $(".fa-play").removeClass("fa-pause"); 
                 } else if(event.data == YT.PlayerState.PLAYING){
                     isPlaying = true;
                 }
                 reValueOrder();
                 nowPlaying();
+                setCurrentSong();
             }
             
             function removeFirstTrack() {
@@ -176,7 +178,7 @@
                     }, 1000);
                 });
                 
-                bindResults();
+                
 
 				$("body").keydown(function(e) {
 					if(e.keyCode == 39) { // right
@@ -198,6 +200,10 @@
                 $("#collab_check").click(function(){
                     $("#collab_field").fadeOut("slow");
                 });
+                
+                
+                
+                bindResults();
             });
         </script>
     </body>
