@@ -21,8 +21,8 @@ class Querate (db.Model):
     
 db.create_all()    
 
-db_conn = psycopg2.connect(db_conn)
-cur = db_conn.cursor()
+# db_conn = psycopg2.connect(db_conn)
+# cur = db_conn.cursor()
 
 # cur.execute("SELECT current_song FROM querate WHERE playlist_id = 'PL5qjstFaIeLz8fw0koxtYfEB5nA6-lAh0'")
 # rows = cur.fetchall()
