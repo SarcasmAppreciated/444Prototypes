@@ -29,6 +29,7 @@
     # monkey.patch_all()
 
 
+import pdb
 import time
 from threading import Thread
 from flask import Flask, render_template, jsonify, request
@@ -85,17 +86,17 @@ def set_current_song():
     currentSong = request.args.get('current')
     cur.execute("UPDATE querate SET current_song = %(current)s WHERE playlist_id = %(playlist)s", {'current' : currentSong, 'playlist' : playlistID})
     db_conn.commit()
-    return jsonify({"result" : currentSong})    
     
+    return jsonify({"result" : currentSong})    
+
 @app.route('/_get_current_song')
 def get_current_song():
-    playlistID = request.args.get('playlist')
-    print playlistID
-    # cur.execute("SELECT current_song FROM querate WHERE playlist_id = %(playlist)s", {'playlist' : playlistID})
-    # rows = cur.fetchall()
-    result = Querate.query.filter_by(playlist_id = playlistID).first()
-    print result
-    return jsonify({"result" : result.current_song})
+    playlistID = request.args.get('playlist')    
+    
+    result = Querate.query.filter_by(playlist_id=playlistID).first()
+    retVal = result.current_song
+    
+    return jsonify({"result" : retVal})   
     
 @socketio.on('my broadcast event', namespace='/test')
 def test_message(message):

@@ -327,7 +327,7 @@ function hideSearch() {
 function bindSocket(){
     socket = io.connect('http://' + document.domain + ':' + location.port + '/test');                
     socket.on('my response', function(msg) {
-        console.log(msg.data);
+        // console.log(msg.data);
         if(msg.data == "RefreshList") {            
             // setTimeout(function(){
                 // $("#playlist").empty();
@@ -359,22 +359,21 @@ function storePlaylistVar() {
 
 function setCurrentSong() {
     $.getJSON('/_set_current_song', {
-            playlist: playlistId,
-            current: player.getPlaylistIndex()
-        }, function(data) {
-         console.log("SET: " + data.result);
+        playlist: playlistId,
+        current: player.getPlaylistIndex()
+    }, function(data) {
+        console.log("SET: " + data.result);
     });
     currentSong = player.getPlaylistIndex();    
 }
 
 function getCurrentSong() {
     $.getJSON('/_get_current_song', {
-            playlist: playlistId
-        }, function(data) {
-            console.log("GET: " + data.result);
-            currentSong = data.result;
-            // console.log("currentSong is: " + currentSong);
-    });    
+        playlist: playlistId
+    }, function(data) {
+        console.log(data);
+        currentSong = data.result;
+    });
 }
 
 function skip() {
@@ -388,8 +387,8 @@ function skip() {
         }, 200);
         
         setTimeout(function(){
-            console.log("here");
             setCurrentSong();
+            
             sentCommand = true;
             updateServer();            
         }, 500);
