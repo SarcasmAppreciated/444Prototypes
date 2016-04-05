@@ -37,6 +37,7 @@ from models import *
 
 app = Flask(__name__, static_url_path='')
 app.config['SECRET_KEY'] = 'secret!'
+
 socketio = SocketIO(app)
 # socketio = SocketIO(app, async_mode=async_mode)
 # thread = None
@@ -84,15 +85,17 @@ def set_current_song():
     currentSong = request.args.get('current')
     cur.execute("UPDATE querate SET current_song = %(current)s WHERE playlist_id = %(playlist)s", {'current' : currentSong, 'playlist' : playlistID})
     db_conn.commit()
-    return jsonify({"result" : "Set current song as " + currentSong})    
+    return jsonify({"result" : currentSong})    
     
 @app.route('/_get_current_song')
 def get_current_song():
     playlistID = request.args.get('playlist')
-    cur.execute("SELECT current_song FROM querate WHERE playlist_id = %(playlist)s", {'playlist' : playlistID})
-    rows = cur.fetchall()
-    print rows
-    return jsonify({"result" : rows})
+    print playlistID
+    # cur.execute("SELECT current_song FROM querate WHERE playlist_id = %(playlist)s", {'playlist' : playlistID})
+    # rows = cur.fetchall()
+    result = Querate.query.filter_by(playlist_id = playlistID).first()
+    print result
+    return jsonify({"result" : result.current_song})
     
 @socketio.on('my broadcast event', namespace='/test')
 def test_message(message):

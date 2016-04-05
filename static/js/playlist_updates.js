@@ -3,11 +3,14 @@ var playlistId;
 var currentPlaylist = [];
 var socket;
 var currentSong = 0;
+var isHost = true;
+var sentCommand = false;
 
 // After the API loads, call a function to enable the playlist creation form.
 function handleAPILoaded() {
     enableForm();
     bindSocket();
+    skip();
 }
 
 // Enable the form for creating a playlist.
@@ -48,10 +51,11 @@ function joinPlaylist() {
     $("#join_check").click(function() {
         playlistId = $('#join_id').val();
         $('#playlist-id').val(playlistId);
-        requestVideoPlaylist(playlistId, false);
+        setTimeout(function(){
+            requestVideoPlaylist(playlistId, false);
+        }, 500);        
         $("#play, #skip").fadeOut("slow");
-        player.mute();
-        player.pauseVideo();
+        isHost = false;
         getCurrentSong();
     });    
 }
@@ -112,6 +116,7 @@ function requestVideoPlaylist(playlistId, isAdd, pageToken) {
             if(isAdd)
                 addPlaylistObject(playlistItems);
             else {
+                $("#playlist").empty();
                 recreatePlaylistObject(playlistItems);
             }
         }); 
@@ -147,9 +152,13 @@ function createEntireTrackList() {
         else
             $("#playlist").append("<div class='playlist_track'><div class='track_num'>" + i +"</div><div class='track_artist_song'><h3 style='margin-top: 10px;'>" + currentPlaylist[i].title.substring(0, currentPlaylist[i].title.indexOf(" - ")) +"</h3><h2>" + currentPlaylist[i].title.substring(currentPlaylist[i].title.indexOf(" - ") + 3, currentPlaylist[i].title.length) + "</h2></div><div index=" + i + " value= '" + currentPlaylist[i].id +"' state='0' class='track_rating'><div class='arrow_up'></div><p>" + currentPlaylist[i].rating + "</p><div class='arrow_down'></div></div></div>");
     }
-    setTimeout(function(){
+    setTimeout(function(){        
+        for (var i = 0; i < currentSong; i++) {
+            $(".playlist_track").first().remove();
+            player.nextVideo();
+        }
         loadCurrentPlaylist();
-    }, 1000);
+    }, 500);
     $(".fa-play").addClass("fa-pause");
     rebindRating();
 }
@@ -159,7 +168,11 @@ function loadCurrentPlaylist() {
                         listType:"playlist",
                         index:player.getPlaylistIndex(),
                         startSeconds: player.getCurrentTime(),
-                        suggestedQuality:"default"});    
+                        suggestedQuality:"default"});
+    if(!isHost) {
+        player.mute();
+        player.pauseVideo();
+    }
 }
 
 function createTrack(i){
@@ -200,7 +213,7 @@ function removeFromPlaylist(pid) {
 
 function search(query) {
     var q = query;
-    console.log (q);
+    console.log(q);
     var request = gapi.client.youtube.search.list({
         q: q,
         part: 'snippet'
@@ -223,20 +236,22 @@ function populateResults(resultItems) {
 
 function bindResults() {
     $(".result_track").click(function(){
-        var trackID = $(this).attr("value")
+        var trackID = $(this).attr("value");
         
-        updateServer();
+        
+        sentCommand = true;
+        updateServer();        
         
         addVideoToPlaylist(trackID);     
         
-        // setTimeout(function(){
-            // loadCurrentPlaylist();
-        // }, 1000);
+        setTimeout(function(){
+            loadCurrentPlaylist();
+        }, 500);
         
         setTimeout(function(){
             rebindRating();
             reValueOrder();
-        }, 1500);
+        }, 200);
 
         $(".fa-play").addClass("fa-pause");
      
@@ -296,6 +311,7 @@ function removeVideo($id) {
     console.log(tid);
     removeFromPlaylist(tid);
     
+    sentCommand = true;
     updateServer();
     
     currentPlaylist.splice($id.attr("index"), 1);
@@ -313,12 +329,18 @@ function bindSocket(){
     socket.on('my response', function(msg) {
         console.log(msg.data);
         if(msg.data == "RefreshList") {            
-            setTimeout(function(){
-                $("#playlist").empty();
-                setTimeout(function(){
-                    requestVideoPlaylist(playlistId, false);  
-                }, 200);                              
-            }, 800);            
+            // setTimeout(function(){
+                // $("#playlist").empty();
+                // setTimeout(function(){
+                    
+                    getCurrentSong();
+                    
+                    if(!sentCommand)
+                        requestVideoPlaylist(playlistId, false);
+                    else
+                        sentCommand = false;
+                // }, 200);                              
+            // }, 800);            
         }
     });
 }
@@ -340,15 +362,37 @@ function setCurrentSong() {
             playlist: playlistId,
             current: player.getPlaylistIndex()
         }, function(data) {
-         console.log("SET CS: " + data.result);
-    });    
+         console.log("SET: " + data.result);
+    });
+    currentSong = player.getPlaylistIndex();    
 }
 
 function getCurrentSong() {
     $.getJSON('/_get_current_song', {
             playlist: playlistId
         }, function(data) {
-         console.log("GET CS: " + data.result);
+            console.log("GET: " + data.result);
+            currentSong = data.result;
+            // console.log("currentSong is: " + currentSong);
+    });    
+}
+
+function skip() {
+    $("#skip").click(function(){                  
+        loadCurrentPlaylist();                     
+        setTimeout(function(){ 
+            player.nextVideo(); 
+            removeFirstTrack(); 
+            nowPlaying(); 
+            reValueOrder();
+        }, 200);
+        
+        setTimeout(function(){
+            console.log("here");
+            setCurrentSong();
+            sentCommand = true;
+            updateServer();            
+        }, 500);
     });    
 }
 

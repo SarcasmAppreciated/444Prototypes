@@ -124,28 +124,21 @@
                     }
                 });
                 
-                $("#skip").click(function(){
-                    loadCurrentPlaylist();                    
-                    setTimeout(function(){
-                        player.nextVideo();
-                        removeFirstTrack();
-                        nowPlaying();
-                        reValueOrder();
-                    }, 500);
-                });
             }
 
             function onPlayerStateChange(event) {
                 if (event.data == YT.PlayerState.ENDED && isPlaying) {
                     isPlaying = false;
                     removeFirstTrack();
-                    $(".fa-play").removeClass("fa-pause"); 
+                    $(".fa-play").removeClass("fa-pause");
+                    setCurrentSong();
                 } else if(event.data == YT.PlayerState.PLAYING){
                     isPlaying = true;
                 }
                 reValueOrder();
-                nowPlaying();
-                setCurrentSong();
+                setTimeout(function(){
+                    nowPlaying();
+                }, 500);
             }
             
             function removeFirstTrack() {
