@@ -7,7 +7,7 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db_conn_create = 'postgresql+psycopg2://querateuser:ih8python@localhost/queratedb'
-db_conn = "host='localhost' dbname='queratedb' user='querateuser' password='ih8python'"  
+# db_conn = "host='localhost' dbname='queratedb' user='querateuser' password='ih8python'"  
 # app.config['SQLALCHEMY_DATABASE_URI'] = db_conn_create
 db = SQLAlchemy(app)
 
